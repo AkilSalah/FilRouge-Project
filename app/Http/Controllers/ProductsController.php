@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -12,7 +14,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categories::all();
+        $products = Products::with('category')->get();
+        return view('Admin.produits',compact('products','categories'));
     }
 
     /**
@@ -28,7 +32,27 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'categorie' =>'required',
+            'name' =>'required',
+            'price' =>'required',
+            'image' =>'required',
+            'description' =>'required',
+        ]);
+
+        $imagePath = $request->file('image')->store('public/images/products');
+        $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
+
+        Products::create([
+            'id_Category' => $request->categorie,
+            'productName' => $request->name,
+            'productPrice' => $request->price,
+            'productImage' => $relativeImagePath,
+            'productDescription' => $request->description
+        ]);
+
+        return redirect()->back();
+
     }
 
     /**
@@ -50,16 +74,51 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Products $products)
-    {
-        //
+   
+
+public function update(Request $request, Products $product)
+{
+    $validateRequest = $request->validate([
+        'categorie' => 'required',
+        'name' => 'required',
+        'price' => 'required',
+        'image' => 'image',
+        'description' => 'required',
+    ]);
+
+    if ($request->hasFile('image')) {
+        if ($product->productImage && Storage::exists($product->productImage)) {
+            Storage::delete($product->productImage);
+        }
+
+        $imagePath = $request->file('image')->store('public/images/products');
+        $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
+
+        $product->update([
+            'productImage' => $relativeImagePath,
+        ]);
     }
+
+    $product->update([
+        'id_Category' => $validateRequest['categorie'],
+        'productName' => $validateRequest['name'],
+        'productPrice' => $validateRequest['price'],
+        'productDescription' => $validateRequest['description'],
+    ]);
+
+    return redirect()->back()->with('success', 'Produit mis à jour avec succès.');
+}
+
+ 
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Products $products)
+    public function destroy(Products $product)
     {
-        //
+        $product->delete();
+        return redirect()->back();
     }
+
 }

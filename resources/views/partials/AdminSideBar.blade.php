@@ -7,19 +7,19 @@
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="#">
+				<a href="{{ route('Admin.dashboard') }}">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{ route('Admin.categorie') }}">
 					<i class='bx bxs-shopping-bag-alt' ></i>
 					<span class="text">Catégories</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{ route('Admin.produit') }}">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">Produits</span>
 				</a>
@@ -47,9 +47,6 @@
 		</ul>
 	</section>
 	<!-- SIDEBAR -->
-
-
-
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- NAVBAR -->
