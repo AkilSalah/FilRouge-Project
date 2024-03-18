@@ -20,7 +20,16 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'status',
     ];
+
+    public function guide(){
+        return $this->hasMany(Guide::class);
+    }
+    public function client(){
+        return $this->hasMany(Client::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

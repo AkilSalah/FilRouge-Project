@@ -12,7 +12,7 @@ class GuideController extends Controller
      */
     public function index()
     {
-        //
+        return view('Guide.dashboard');
     }
 
     /**
