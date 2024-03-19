@@ -45,6 +45,10 @@ class LoginController extends Controller
         }
     }
 
+    public function logout(){
+        auth()->logout();
+        return redirect()->route('login');
+    }
     /**
      * Display the specified resource.
      */

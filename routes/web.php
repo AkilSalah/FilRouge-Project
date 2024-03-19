@@ -6,19 +6,20 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GuideController;
+use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass;
 
 Route::get('/register', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/login', [LoginController::class, 'create']);
 Route::post('/login', [LoginController::class, 'store'])->name('login');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ClientController::class, 'index'])->name('welcome');
+
 
 // ---------------------------------------------------------------------------------------
 Route::get('/Admin/Dashboard', [AdminController::class,'index'])->name('Admin.dashboard');
@@ -34,9 +35,11 @@ Route::put('/Admin/Produit/{product}', [ProductsController::class, 'update'])->n
 Route::delete('/Admin/Produit/{product}', [ProductsController::class, 'destroy'])->name('delete.produit');
 // --------------------------------------------------------------------------------------------
 
-
-
-
 Route::get('Guide/Dashboard',[GuideController::class,'index'])->name('Guide.dashboard');
 
+// --------------------------------------------------------------------------------------------------
+Route::get('/client/panier', [PanierController::class, 'index'])->name('client.panier');
+Route::post('Client/AddToCart/{productId}',[ClientController::class,'store'])->name('add_to_cart');
 Route::get('Client/Home',[ClientController::class,'index'])->name('Client');
+
+// ----------------------------------------------------------------------------------------------------------

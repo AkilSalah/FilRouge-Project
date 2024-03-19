@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Panier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PanierController extends Controller
 {
@@ -11,9 +13,19 @@ class PanierController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+{
+    $user = Auth::user()->id;
+    $idClient = Client::where('id_User', $user)->first(); 
+    $panier = Panier::where('id_Client', $idClient->id)->first();
+
+    if ($panier) {
+        $products = $panier->products;
+        return view('Client.panier', compact('products'));
+    } else {
+        
+        return view('Client.panier', compact('products'))->with('message', 'Votre panier est vide.');
     }
+}
 
     /**
      * Show the form for creating a new resource.
@@ -28,7 +40,7 @@ class PanierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

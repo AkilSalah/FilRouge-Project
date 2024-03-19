@@ -2,7 +2,7 @@
     <div class="py-12 px-6 sm:px-10">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         <div class="lg:col-span-2">
-          <a href='javascript:void(0)'><img src="https://readymadeui.com/readymadeui-light.svg" alt="logo"
+          <a href='javascript:void(0)'><img src="{{ asset('/images/pêcheLogo.jpg') }}" alt="logo"
             class='w-48 mb-6' /></a>
           <p class="text-gray-300 text-[15px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.</p>
