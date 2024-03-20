@@ -14,4 +14,7 @@ class Guide extends Model
     public function user(){
         return $this->belongsTo(User::class, 'id_User');
     }
+    public function voyages(){
+        return $this->hasMany(Voyage::class, 'guide_id');
+    }
 }

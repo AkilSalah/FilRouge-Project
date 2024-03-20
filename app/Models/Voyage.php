@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Voyage extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'guide_id',
+        'image',
+        'title',
+        'description',
+        'nbPlaces',
+        'date',
+        'lieu',
+    ];
+    public function guide(){
+        return $this->belongsTo(Guide::class, 'guide_id');
+    }
+    
+
 }

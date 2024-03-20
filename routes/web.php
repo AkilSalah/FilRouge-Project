@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\VoyageController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass;
 
@@ -36,6 +37,10 @@ Route::delete('/Admin/Produit/{product}', [ProductsController::class, 'destroy']
 // --------------------------------------------------------------------------------------------
 
 Route::get('Guide/Dashboard',[GuideController::class,'index'])->name('Guide.dashboard');
+Route::get('/Guide/Voyages' ,[VoyageController::class , 'index'])->name('Guide.voyages');
+Route::post('/Guide/Voyages',[VoyageController::class, 'store'])->name('insert.voyages');
+Route::put('/Guide/Voyages/{voyage}',[VoyageController::class, 'update'])->name('update.voyages');
+Route::delete('/Guide/Voyages/{voyage}',[VoyageController::class, 'destroy'])->name('destroy.voyages');
 
 // --------------------------------------------------------------------------------------------------
 Route::get('/client/panier', [PanierController::class, 'index'])->name('client.panier');

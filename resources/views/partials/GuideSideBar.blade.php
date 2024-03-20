@@ -3,7 +3,7 @@
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">AdminHub</span>
+			<span class="text">Guide</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
@@ -13,9 +13,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{ route('Guide.voyages') }}">
 					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">My Store</span>
+					<span class="text">Voyages</span>
 				</a>
 			</li>
 			<li>
@@ -45,11 +45,12 @@
 				</a>
 			</li>
 			<li>
-				<a href="#" class="logout">
+				<a href="{{ route('logout') }}" class="logout">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
-			</li>
+			</li>	
+			
 		</ul>
 	</section>
 	<!-- SIDEBAR -->
