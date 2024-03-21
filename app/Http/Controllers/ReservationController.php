@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Reservation;
+use App\Models\Voyage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($tripId)
     {
-        //
+    $trip = Voyage::with('guide.user')
+    ->where('id' ,$tripId)
+    ->first();
+    return view('Client.reservation',compact('trip'));
     }
 
     /**
@@ -28,7 +34,30 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Auth::user()->id;
+        $client = Client::where('id_User', $user)->first();
+        $tripId = $request->input('tripId');
+        $trip = Voyage::find($tripId);
+
+        $existReservation = Reservation::where('Client_id',$client->id)
+        ->where('voyage_id', $tripId)
+        ->first();
+        if( $client && !$existReservation && $trip && $trip->nbPlaces > 0) {
+
+            $reservation = Reservation::create([
+                'Client_id' => $client->id,
+                'voyage_id' => $tripId,
+            ]);
+            $trip->nbPlaces -= 1;
+            $trip->save();
+            return redirect()->back()->with('success', 'Votre réservation a été effectuée avec succès!');
+        }else{
+            return redirect()->back()->with('error', 'Impossible de créer la réservation. Vérifiez les disponibilités.');
+
+        }
+        
+
+
     }
 
     /**

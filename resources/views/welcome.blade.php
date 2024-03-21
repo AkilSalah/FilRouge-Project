@@ -264,26 +264,50 @@
                   brand. Secure a consistent brand image with a domain name that
                   matches your business.
                 </p>
-                <a
-                href="javascript:void(0)"
-                class="inline-flex items-center justify-center rounded-md border border-primary px-7 py-3 text-center text-base font-medium text-primary hover:bg-blue-light-5 hover:text-body-color active:bg-blue-light-3 disabled:border-gray-3 disabled:bg-gray-3 disabled:text-dark-5 dark:hover:text-dark-3" >
-                Get Started
-              </a>
+               
               </div>
             </div>
           </div>
         </div>
       </section>
-
       {{-- services section --}}
 
       <section class="overflow-hidden bg-white pb-12 pt-10 dark:bg-dark lg:pb-[90px] lg:pt-[90px]">
-        <h1 class="mb-4 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">Our <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">Services</mark></h1>
-        <div class="font-[sans-serif] mt-10 bg-gray-100">
+         <h1 class="mb-4 ml-7 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">Our <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">Services</mark></h1>
+         <div class=" flex justify-around flex-wrap">
+          <form action="{{ route('Client.fetch') }}" method="GET" >
+            @csrf
+            <div class="bg-white flex gap-2">
+                 <div>
+                <input type='search' name="search" placeholder='Search Something...' class="mt-6 ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                </div>
+                <div>
+                    <button type="submit" class="px-4 py-2 mt-7 text-sm font-medium text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">Search</button>
+                </div>           
+              </div>
+            </form>
+    
+            <div>
+              <form class="flex gap-2" action="{{ route('Client.fetch') }}" method="GET">
+                @csrf
+                <select id="Categorie" name="Categorie" class="mt-6 ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected disabled>Sélectionnez une catégorie</option>
+                  <option value="Tout">Tout</option>
+                  @foreach ($categories as $categorie)
+                  <option value="{{$categorie->id}}">{{$categorie->categoryName}}</option>
+                  @endforeach
+                </select>
+                <div>
+                  <button type="submit" class="px-4 py-2 mt-7 text-sm font-medium text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">Filtrer</button>
+                </div>
+              </form>
+            </div>
+        </div>
+        <div class="font-[sans-serif] mt-10 ">
             <div class="p-4 mx-auto lg:max-w-7xl sm:max-w-full">
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach ($products as $product)
-                <div class="bg-white rounded-2xl p-6  hover:-translate-y-2 transition-all relative">
+                <div class="bg-blue-100 rounded-2xl p-6 hover:-translate-y-2 transition-all relative">
                   <div class="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18px" class="fill-gray-800 inline-block" viewBox="0 0 64 64">
                       <path
@@ -311,7 +335,6 @@
                           Add to cart
                         </button>
                         </form>
-                        
                       </div>
                     </div>
                   </div>

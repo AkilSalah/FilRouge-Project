@@ -19,6 +19,25 @@ class ProductsController extends Controller
         return view('Admin.produits',compact('products','categories'));
     }
 
+
+
+public function filterSearch(Request $request)
+{
+    $categories = Categories::all();
+    $products = Products::query();
+    $search = $request->input('search');
+    $categoryFilter = $request->input('Categorie');
+    if ($search) {
+        $products->where('productName', 'like', '%' . $search . '%');
+    }
+    if ($categoryFilter && $categoryFilter !== 'Tout') {
+        $products->where('id_Category', $categoryFilter);
+    }
+    $products = $products->get();
+    return view('welcome', compact('products','categories'));
+}
+
+
     /**
      * Show the form for creating a new resource.
      */

@@ -33,9 +33,13 @@
                     </div>
                     <div>
                       <p class="text-md font-bold text-[#333]"> {{$product->productName}} </p>
-                      <button type="button" class="mt-4 font-semibold text-red-400 text-sm">
+                      <form action="{{ route('deleteFromPanier', $product->id) }}" method="POST" >
+                        @method('delete')
+                        @csrf
+                       <button type="submit" class="mt-4 font-semibold text-red-400 text-sm">
                         Remove
                       </button>
+                      </form>
                     </div>
                   </div>
                 </td>
@@ -63,8 +67,8 @@
       <div class="bg-gray-50 p-10">
         <h3 class="text-xl font-extrabold text-[#333] border-b pb-4">Order Summary</h3>
         <ul class="text-[#333] divide-y mt-6">
-          <li class="flex flex-wrap gap-4 text-md py-4">Tax <span class="ml-auto font-bold">$4.00</span></li>
-          <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span class="ml-auto">  {{$sumTotal}}</span></li>
+          <li class="flex flex-wrap gap-4 text-md py-4">Tax <span class="ml-auto font-bold">4.00 DH</span></li>
+          <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span class="ml-auto">  {{$sumTotal}} DH</span></li>
         </ul>
         <button type="button" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
           out</button>

@@ -22,10 +22,29 @@ class PanierController extends Controller
         $products = $panier->products;
         return view('Client.panier', compact('products'));
     } else {
-        
         return view('Client.panier', compact('products'))->with('message', 'Votre panier est vide.');
     }
 }
+
+
+    public function deleteFromPanier($idProduct) {
+        $user = Auth::user()->id;
+        $idClient = Client::where('id_User', $user)->first(); 
+        $panier = Panier::where('id_Client', $idClient->id)->first();
+        if ($panier) {
+            $products = $panier->products;
+            foreach ($products as $product) {
+                if ($product->id == $idProduct) {
+                    $product->pivot->delete();
+                }
+            }
+            return redirect()->back()->with('message', 'Produit supprimé du panier.');
+        } else {
+            return redirect()->back()->with('message', 'Votre panier est vide.');
+        }
+    }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -72,6 +91,6 @@ class PanierController extends Controller
      */
     public function destroy(Panier $panier)
     {
-        //
+     
     }
 }

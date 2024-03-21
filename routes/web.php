@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\VoyageController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass;
@@ -16,7 +17,7 @@ Route::get('/register', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/login', [LoginController::class, 'create']);
+Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login');
 
 Route::get('/', [ClientController::class, 'index'])->name('welcome');
@@ -44,7 +45,11 @@ Route::delete('/Guide/Voyages/{voyage}',[VoyageController::class, 'destroy'])->n
 
 // --------------------------------------------------------------------------------------------------
 Route::get('/client/panier', [PanierController::class, 'index'])->name('client.panier');
+Route::get('/client/Trips', [ClientController::class, 'tripIndex'])->name('client.trip');
+Route::get('/client/reservation/{trip}', [ReservationController::class, 'index'])->name('client.trip.show');
+Route::post('/client/reservation', [ReservationController::class,'store'])->name('client.store');
 Route::post('Client/AddToCart/{productId}',[ClientController::class,'store'])->name('add_to_cart');
 Route::get('Client/Home',[ClientController::class,'index'])->name('Client');
-
+Route::get('Client/fetch',[ProductsController::class,'filterSearch'])->name('Client.fetch');
+Route::delete('Client/Panier/{idProduct}' ,[PanierController::class , 'deleteFromPanier'])->name('deleteFromPanier');
 // ----------------------------------------------------------------------------------------------------------

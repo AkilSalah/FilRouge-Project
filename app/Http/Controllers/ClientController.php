@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Client;
 use App\Models\Panier;
 use App\Models\Products;
+use App\Models\Voyage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,23 +17,16 @@ class ClientController extends Controller
      */
     public function index()
     {
+        $categories = Categories::all();
         $products = Products::get();
-        return view('welcome',compact('products'));
+        return view('welcome',compact('products','categories'));
     }
 
-    
-    // public function nombreProducts()
-    // {
-    //     $user = Auth::user()->id;
-    //     $idClient = Client::where('id_User', $user)->first(); 
-    //     $panier = Panier::where('id_Client', $idClient->id)->first();
-    //     $nombreProduct = 0; 
-        
-    //     if ($panier) {
-    //         $nombreProduct = $panier->products->count();
-    //     }
-    //     return view('welcome', compact('nombreProduct'));
-    // }
+    public function tripIndex(){
+        $trips = Voyage::with('guide.user')->get();
+        return view('Client.trip',compact('trips'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

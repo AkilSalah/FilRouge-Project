@@ -47,8 +47,9 @@
           </svg>
         </button>    
         @else
-          <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
-   
+          <form action="{{ route('login') }}" method="GET" >
+          <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+          </form>
         @endif
 
         
@@ -60,8 +61,8 @@
         <li class='max-lg:border-b max-lg:py-2 px-3'><a href='javascript:void(0)'
             class='hover:text-[#007bff] text-gray-600 font-bold block text-[15px]'>Team</a>
         </li>
-        <li class='max-lg:border-b max-lg:py-2 px-3'><a href='javascript:void(0)'
-            class='hover:text-[#007bff] text-gray-600 font-bold block text-[15px]'>Feature</a>
+        <li class='max-lg:border-b max-lg:py-2 px-3'><a href='{{ route('client.trip') }}'
+            class='hover:text-[#007bff] text-gray-600 font-bold block text-[15px]'>Trips</a>
         </li>
         <li class='max-lg:border-b max-lg:py-2 px-3'><a href='javascript:void(0)'
             class='hover:text-[#007bff] text-gray-600 font-bold block text-[15px]'>Blog</a>

@@ -17,4 +17,7 @@ class Client extends Model
     public function panier(){
         return $this->hasOne(Panier::class,'id_Client');
     }
+    public function reservation(){
+        return $this->hasMany(Reservation::class,'Client_id');
+    }
 }
