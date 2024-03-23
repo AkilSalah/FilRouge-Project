@@ -25,7 +25,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{ route('Admin.theme') }}">
 					<i class='bx bxs-message-dots' ></i>
 					<span class="text">Thèmes</span>
 				</a>
@@ -65,7 +65,7 @@
 				<span class="num">8</span>
 			</a>
 			<a href="#" class="profile">
-				<img src="img/people.png">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfvHO_syH98KMSt6TBf28IV37Mv21b2fJ68PHaVsDpiA&s">
 			</a>
 		</nav>
 		<!-- NAVBAR -->

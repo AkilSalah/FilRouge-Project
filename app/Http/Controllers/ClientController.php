@@ -6,6 +6,7 @@ use App\Models\Categories;
 use App\Models\Client;
 use App\Models\Panier;
 use App\Models\Products;
+use App\Models\Theme;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,10 @@ class ClientController extends Controller
      */
     public function index()
     {
+        $themes = Theme::with('tag')->get();
         $categories = Categories::all();
         $products = Products::get();
-        return view('welcome',compact('products','categories'));
+        return view('welcome',compact('products','categories','themes'));
     }
 
     public function tripIndex(){

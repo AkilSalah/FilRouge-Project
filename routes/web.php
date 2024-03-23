@@ -9,6 +9,7 @@ use App\Http\Controllers\GuideController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\VoyageController;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass;
@@ -35,6 +36,10 @@ Route::get('/Admin/Produit', [ProductsController::class, 'index'])->name('Admin.
 route::post('/Admin/Produit', [ProductsController::class, 'store'])->name('insert.produit');
 Route::put('/Admin/Produit/{product}', [ProductsController::class, 'update'])->name('update.produit');
 Route::delete('/Admin/Produit/{product}', [ProductsController::class, 'destroy'])->name('delete.produit');
+Route::get('/Admin/Theme', [ThemeController::class, 'index'])->name('Admin.theme');
+route::post('/Admin/Theme', [ThemeController::class,'store'])->name('insert.theme');
+Route::put('Admin/Theme', [ThemeController::class, 'update'])->name('update.theme');
+Route::delete('Admin/Theme/{theme}', [ThemeController::class, 'destroy'])->name('theme.delete');
 // --------------------------------------------------------------------------------------------
 
 Route::get('Guide/Dashboard',[GuideController::class,'index'])->name('Guide.dashboard');

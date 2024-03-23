@@ -106,7 +106,7 @@ Products
               {{$product->category->categoryName}}
             </td>
             <td class="px-6 py-4 text-base">
-              {{$product->productPrice}}
+              {{$product->productPrice}} DH
             </td>
             <td class=" flex o px-6 py-14">
               <button class="mr-4" title="Edit" data-modal-target="crud-modal-up-{{$product->id}}" data-modal-toggle="crud-modal-up-{{$product->id}}">

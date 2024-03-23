@@ -20,4 +20,7 @@ class Client extends Model
     public function reservation(){
         return $this->hasMany(Reservation::class,'Client_id');
     }
+    public function articles(){
+        return $this->hasMany(Article::class,'client_id');
+    }
 }

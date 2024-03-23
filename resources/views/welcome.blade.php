@@ -93,7 +93,7 @@
     {{-- about section  --}}
 
     <section class="overflow-hidden bg-white pb-12 pt-10 dark:bg-dark lg:pb-[90px] lg:pt-[90px]">
-        <h1 class="mb-4 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">About <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">us</mark></h1>
+        <h1 class="mb-4 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">ABOUT <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">US</mark></h1>
         <div class="container mt-16 mx-auto">
           <div class="-mx-4 flex flex-wrap items-center justify-between">
             <div class="w-full px-4 lg:w-6/12">
@@ -273,7 +273,7 @@
       {{-- services section --}}
 
       <section class="overflow-hidden bg-white pb-12 pt-10 dark:bg-dark lg:pb-[90px] lg:pt-[90px]">
-         <h1 class="mb-4 ml-7 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">Our <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">Services</mark></h1>
+         <h1 class="mb-4 ml-7 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">OUR <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">SERVECES</mark></h1>
          <div class=" flex justify-around flex-wrap">
           <form action="{{ route('Client.fetch') }}" method="GET" >
             @csrf
@@ -344,5 +344,29 @@
             </div>
           </div>
         </section>
+
+
+        {{-- blog section  --}}
+
+        <div class="bg-white font-[sans-serif] my-4">
+          <div class="max-w-7xl mx-auto">
+            <div class="text-center">
+              <h2 class="mb-4 ml-7 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">LATEST <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">BLOGS</mark></h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 max-md:max-w-lg mx-auto">
+              @foreach ($themes as $theme)
+               <div class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
+                <img src="{{ asset($theme->image) }}" alt="Blog Post 1" class="w-full h-60 object-cover" />
+                <div class="p-6">
+                  <span class="text-sm block text-gray-400 mb-2"> {{$theme->created_at->format('d-M-Y')}} </span>
+                  <h3 class="text-xl font-bold text-[#333]"> {{$theme->title}} </h3>
+                  <hr class="my-6" />
+                  <p class="text-gray-400 text-sm"> {{$theme->description}} </p>
+                </div>
+              </div>   
+              @endforeach
+            </div>
+          </div>
+        </div>
 
 @endsection
