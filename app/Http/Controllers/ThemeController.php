@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Models\Theme;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ThemeController extends Controller
 {
@@ -69,16 +70,57 @@ class ThemeController extends Controller
      */
     public function edit(Theme $theme)
     {
-        //
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Theme $theme)
-    {
-        //
+{
+    $request->validate([
+        'title' => 'required',
+        'image' => 'required',
+        'description' =>'required',
+        'tags' => 'required|array',
+    ]);
+
+    if ($request->hasFile('image')) {
+        if ($theme->image && Storage::exists($theme->image)) {
+            Storage::delete($theme->image);
+        }
+
+        $imagePath = $request->file('image')->store('public/images/themes');
+        $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
+
+        $theme->update([
+            'image' => $relativeImagePath, 
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+    } else {
+        $theme->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
     }
+
+    $theme->tag()->delete();
+
+    $tags = explode(',', $request->input('tags')[0]);
+    foreach ($tags as $tag) {
+        $tag = trim($tag);
+        if (!empty($tag)) {
+            Tag::create([
+                'theme_id' => $theme->id,
+                'tag' => $tag,
+            ]);
+        }
+    }
+
+    return redirect()->back();
+}
+
 
     /**
      * Remove the specified resource from storage.
