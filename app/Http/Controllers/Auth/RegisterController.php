@@ -10,7 +10,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Ramsey\Uuid\Guid\Guid;
 
 class RegisterController extends Controller
 {
@@ -35,29 +34,32 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {   
-        $validation =  $request->validate([
-            'name'=>'required',
-            'email'=>'required',
-            'password'=>'required',
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required',
             'role' => 'required',
         ]);
-
-        $validation['password'] = bcrypt($validation['password']);
-        $user = User::create($validation);
-        // // auth()->login($user);
-        
-        // return redirect()->back();
-        if ($user->role === 'Client'){
-            $client = Client::create(['id_User' => $user->id]);
-            Auth::login($user);
-        return redirect()->route('Client'); 
-        }elseif ($user->role === 'Guide'){
-            $guide = Guide::create(['id_User' => $user->id]);
-            Auth::login($user);
-            return redirect()->route('Guide.dashboard');
+    
+        $user = User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => Hash::make($validatedData['password']),
+            'role' => $validatedData['role'],
+        ]);
+    
+        if (Auth::attempt(['email' => $validatedData['email'], 'password' => $validatedData['password']])) {
+            if ($user->role === 'Client') {
+                Client::create(['id_User' => $user->id]);
+                return redirect()->route('Client');
+            } elseif ($user->role === 'Guide') {
+                Guide::create(['id_User' => $user->id]);
+                return redirect()->route('Guide.dashboard');
+            }
         }
-
+        return redirect()->route('login')->with('error', 'Erreur lors de la connexion.');
     }
+    
     /**
      * Display the specified resource.
      */

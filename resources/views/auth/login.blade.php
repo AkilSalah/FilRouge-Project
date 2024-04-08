@@ -107,8 +107,8 @@
                 </div>
               </form>
             </div>
-            <div class="md:h-full max-md:mt-10 bg-[#000842] rounded-xl lg:p-12 p-8">
-              <img src="https://readymadeui.com/signin-image.webp" class="w-full h-full object-contain" alt="login-image" />
+            <div class="md:h-full max-md:mt-10 bg-[#4255E1] rounded-xl lg:p-10 p-5">
+              <img src="/images/login2.png" class="w-full h-full rounded-2xl  object-contain" alt="login-image" />
             </div>
           </div>
         </div>

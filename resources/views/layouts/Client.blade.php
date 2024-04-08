@@ -10,6 +10,8 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet">
      <script defer src="assets/js/alpine.min.js"></script>
     <title>Client| @yield('title')</title>
+    @vite(['resources/js/script.js'])
+
 </head>
 <body>
     @include('partials.ClientNavbar')

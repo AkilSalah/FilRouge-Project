@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -12,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return view('Client.article');
     }
 
     /**
@@ -26,9 +29,26 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request , $themeId)
     {
-        //
+
+        $user = Auth::user()->id;
+        $client = Client::where('id_User', $user)->first();
+        $validatedData = $request->validated();
+
+        $imagePath = $request->file('image')->store('public/images/articles');
+        $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
+
+        $article = Article::create([
+            'title' => $validatedData['name'],
+            'description' => $validatedData['description'],
+            'image' => $relativeImagePath,
+            'client_id' => $client->id,
+            'theme_id' => $request->input('themeId'),
+        ]);
+        
+        return redirect()->back();
+
     }
 
     /**

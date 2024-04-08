@@ -27,13 +27,20 @@ class LoginController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function login(Request $request)
     {
+        // dd($request->all());
         $validate = $request->validate([
-            'email'=>'required',
-            'password'=>'required'
-           ]);
-           if(auth()->attempt(['email'=>$validate['email'],'password' => $validate['password']])){
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+    
+        $credentials = [
+            'email' => $validate['email'],
+            'password' => $validate['password']
+        ];
+    
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->role === 'Admin') {
                 return redirect()->route('Admin.dashboard');
@@ -43,7 +50,9 @@ class LoginController extends Controller
                 return redirect()->route('welcome');
             }
         }
+    
     }
+    
 
     public function logout(){
         auth()->logout();

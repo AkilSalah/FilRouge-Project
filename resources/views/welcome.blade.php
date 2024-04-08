@@ -355,7 +355,10 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 max-md:max-w-lg mx-auto">
               @foreach ($themes as $theme)
-               <div class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
+              <a href="{{ route('articles', ['themeId' => $theme->id]) }}">
+                
+                <input type="hidden" name="themeId" value="{{ $theme->id }}">
+                <div class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
                 <img src="{{ asset($theme->image) }}" alt="Blog Post 1" class="w-full h-60 object-cover" />
                 <div class="p-6">
                   <span class="text-sm block text-gray-400 mb-2"> {{$theme->created_at->format('d-M-Y')}} </span>
@@ -363,7 +366,8 @@
                   <hr class="my-6" />
                   <p class="text-gray-400 text-sm"> {{$theme->description}} </p>
                 </div>
-              </div>   
+              </div> 
+              </a>
               @endforeach
             </div>
           </div>

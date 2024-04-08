@@ -68,14 +68,13 @@
 					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
 				</div>
 			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
+			
 			<a href="#" class="notification">
 				<i class='bx bxs-bell' ></i>
 				<span class="num">8</span>
 			</a>
 			<a href="#" class="profile">
-				<img src="img/people.png">
+				<img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/guide-3190193-2658615.png?f=webp&w=512">
 			</a>
 		</nav>
 		<!-- NAVBAR -->
