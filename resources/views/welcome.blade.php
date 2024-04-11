@@ -345,9 +345,8 @@
           </div>
         </section>
 
-
         {{-- blog section  --}}
-
+        
         <div class="bg-white font-[sans-serif] my-4">
           <div class="max-w-7xl mx-auto">
             <div class="text-center">
@@ -355,9 +354,7 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 max-md:max-w-lg mx-auto">
               @foreach ($themes as $theme)
-              <a href="{{ route('articles', ['themeId' => $theme->id]) }}">
-                
-                <input type="hidden" name="themeId" value="{{ $theme->id }}">
+              <a href="{{ route('articles', ['themeId' => $theme->id]) }}">       
                 <div class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
                 <img src="{{ asset($theme->image) }}" alt="Blog Post 1" class="w-full h-60 object-cover" />
                 <div class="p-6">

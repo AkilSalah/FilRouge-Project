@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductsController;
@@ -21,7 +22,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/login', [LoginController::class, 'create'])->name('login.create');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/', [ClientController::class, 'index'])->name('welcome');
-Route::get('/Articles', [ArticleController::class, 'index'])->name('articles');
+Route::get('/Articles/{themeId}', [ArticleController::class, 'index'])->name('articles');
 
 // ---------------------------------------------------------------------------------------
 
@@ -58,5 +59,10 @@ Route::post('Client/AddToCart/{productId}',[ClientController::class,'store'])->n
 Route::get('Client/Home',[ClientController::class,'index'])->name('Client');
 Route::get('Client/fetch',[ProductsController::class,'filterSearch'])->name('Client.fetch');
 Route::delete('Client/Panier/{idProduct}' ,[PanierController::class , 'deleteFromPanier'])->name('deleteFromPanier');
-Route::post('/Client/AddArticle/{{themeId}} ' ,[ArticleController::class,'store'])->name('storeArticle');
+Route::post('/Client/AddArticle' ,[ArticleController::class,'store'])->name('storeArticle');
+Route::put('/Client/UpdateArticle/{article}' ,[ArticleController::class,'update'])->name('updateArticle');
+Route::delete('/Client/deleteArticle/{article}' ,[ArticleController::class,'destroy'])->name('deleteArticle');
+Route::get('/Client/ArticleDetail/{articleId}', [CommentaireController::class, 'index'])->name('articleDetail');
+
+Route::post('/Client/AddComment/{Article}', [CommentaireController::class,'store'])->name('commentStore');
 // ----------------------------------------------------------------------------------------------------------
