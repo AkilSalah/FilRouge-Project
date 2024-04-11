@@ -63,6 +63,7 @@ Route::post('/Client/AddArticle' ,[ArticleController::class,'store'])->name('sto
 Route::put('/Client/UpdateArticle/{article}' ,[ArticleController::class,'update'])->name('updateArticle');
 Route::delete('/Client/deleteArticle/{article}' ,[ArticleController::class,'destroy'])->name('deleteArticle');
 Route::get('/Client/ArticleDetail/{articleId}', [CommentaireController::class, 'index'])->name('articleDetail');
-
 Route::post('/Client/AddComment/{Article}', [CommentaireController::class,'store'])->name('commentStore');
+Route::put('/Client/UpdateComment/{commentaire}' ,[CommentaireController::class,'update'])->name('commentUpdate');
+Route::delete('/Client/deleteComment/{commentaire}' ,[CommentaireController::class,'destroy'])->name('commentDelete');
 // ----------------------------------------------------------------------------------------------------------

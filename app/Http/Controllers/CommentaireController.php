@@ -16,11 +16,12 @@ class CommentaireController extends Controller
      */
     public function index($articleId)
     {
-    $comments = Commentaire::with('article.client.user')->get();    
     $article = Article::with('client.user','theme')->find($articleId);
+
     if (!$article) {
         abort(404);
     }
+    $comments = Commentaire::with('article.client.user')->where('article_id', $articleId)->get();    
     return view('Client.articleDetails', compact('article', 'comments'));
     }
 
@@ -38,8 +39,6 @@ class CommentaireController extends Controller
      */
     public function store(commentsRequest $request , $articleId)
     {
-        $user = Auth::user()->id;
-        $client = Client::where('id_User', $user)->first();
         $article = Article::findOrFail($articleId);
         $validateData = $request->validated();
          Commentaire::create([
@@ -68,9 +67,17 @@ class CommentaireController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Commentaire $commentaire)
+    public function update(commentsRequest $request, Commentaire $commentaire)
     {
-        //
+        if(auth()->user()->id !== $commentaire->article->client->id_User) {
+            abort(403, 'Unauthorized action.');
+        }
+        $validateData = $request->validated();
+        $commentaire->update([
+            'commentaire' => $validateData['comment'],
+        ]);
+        return redirect()->back();
+
     }
 
     /**
@@ -78,6 +85,10 @@ class CommentaireController extends Controller
      */
     public function destroy(Commentaire $commentaire)
     {
-        //
+        if(auth()->user()->id !== $commentaire->article->client->id_User) {
+            abort(403, 'Unauthorized action.');
+        }
+        $commentaire->delete();
+        return redirect()->back();
     }
 }
