@@ -89,7 +89,7 @@
                 <div
                     class="flex max-lg:flex-col bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] hover:scale-105 transition-all duration-300">
                     <img src="{{ asset($theme->image) }}" alt="Blog Post 1"
-                        class="lg:w-2/5 min-h-[250px] h-full object-cover" />
+                        class="lg:w-2/5 min-h-[250px] h-60  " />
                     <div class="p-6 lg:w-3/5">
                         <h3 class="text-xl font-bold text-[#333]"> {{ $theme->title }} </h3>
                         <span class="text-sm block text-gray-400 mt-2">{{ $theme->created_at->format('d-M-Y') }}</span>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
                 <div id="crud-modall-{{ $theme->id }}" tabindex="-1" aria-hidden="true"
-                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 mt-10 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="relative p-4 w-full max-w-md max-h-full">
                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                             <div
@@ -186,7 +186,7 @@
                                             d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
                                             clip-rule="evenodd"></path>
                                     </svg>
-                                    Enregistrer
+                                    Save
                                 </button>
                             </form>
                         </div>

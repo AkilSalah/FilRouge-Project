@@ -17,6 +17,7 @@ class ThemeController extends Controller
         $themes = Theme::with('tag')->get();
         return view('Admin/theme',compact('themes')); 
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('lieu');
             $table->integer('nbPlaces');
+            $table->boolean('is_published')->default(0);
             $table->timestamps();
         });
     }

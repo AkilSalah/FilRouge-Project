@@ -25,7 +25,9 @@ class ClientController extends Controller
     }
 
     public function tripIndex(){
-        $trips = Voyage::with('guide.user')->get();
+        $trips = Voyage::with('guide.user')
+        ->where('is_published' ,1)
+        ->get();
         return view('Client.trip',compact('trips'));
     }
 

@@ -40,7 +40,9 @@ Route::get('/Admin/Theme', [ThemeController::class, 'index'])->name('Admin.theme
 route::post('/Admin/Theme', [ThemeController::class,'store'])->name('insert.theme');
 Route::put('Admin/Theme/{theme}', [ThemeController::class, 'update'])->name('theme.update');
 Route::delete('Admin/Theme/{theme}', [ThemeController::class, 'destroy'])->name('theme.delete');
-
+Route::get('/Admin/tripApproved', [AdminController::class, 'tripApproved'])->name('tripApproved');
+Route::patch('/Admin/Published/{trip}' ,[AdminController::class ,'tripPublished'])->name('publier');
+Route::delete('/Admin/TripDelete/{theme}',[AdminController::class ,'tripDelete'])->name('trip.delete');
 // --------------------------------------------------------------------------------------------
 
 Route::get('Guide/Dashboard',[GuideController::class,'index'])->name('Guide.dashboard');

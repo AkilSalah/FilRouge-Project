@@ -31,7 +31,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{ route('tripApproved') }}">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Voyages</span>
 				</a>

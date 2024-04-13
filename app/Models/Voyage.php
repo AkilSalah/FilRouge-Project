@@ -15,6 +15,7 @@ class Voyage extends Model
         'description',
         'nbPlaces',
         'date',
+        'is_published',
         'lieu',
     ];
     public function guide(){

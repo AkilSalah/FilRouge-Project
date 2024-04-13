@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Voyage;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,6 +14,26 @@ class AdminController extends Controller
     public function index()
     {
         return view('Admin.dashboard');
+    }
+
+    public function tripApproved(){
+
+        $trips = Voyage::with('guide.user')->where('is_published' , 0)->get();
+        return view('Admin.tripApproved',compact('trips'));
+    }
+
+    public function tripPublished($trip){
+        $trip = Voyage::findOrFail($trip);
+        $trip->update([
+            'is_published' => 1,
+        ]);
+        return redirect()->back();
+    }
+
+    public function tripDelete($trip){
+        $trip = Voyage::findOrFail($trip);
+        $trip->delete();
+        return redirect()->back();
     }
 
     /**

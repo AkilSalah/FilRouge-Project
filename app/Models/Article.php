@@ -12,6 +12,7 @@ class Article extends Model
         'title',
         'description',
         'image',
+        'articleTags',
         'theme_id',
         'client_id',
     ];
