@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\VoyageController;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass;
 
@@ -22,16 +23,15 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/login', [LoginController::class, 'create'])->name('login.create');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/', [ClientController::class, 'index'])->name('welcome');
-Route::get('/Articles/{themeId}', [ArticleController::class, 'index'])->name('articles');
 
 // ---------------------------------------------------------------------------------------
 
+Route::middleware(['auth', 'role:Admin'])->group(function () {
 Route::get('/Admin/Dashboard', [AdminController::class,'index'])->name('Admin.dashboard');
 Route::get('/Admin/Categories', [CategoriesController::class, 'index'])->name('Admin.categorie');
 route::post('/Admin/Categories', [CategoriesController::class, 'store'])->name('insert.categories');
 route::put('/Admin/Categories/{categorie} ', [CategoriesController::class, 'update'])->name('update.categories');
 route::delete('/Admin/Categories/{categorie}', [CategoriesController::class, 'destroy'])->name('delete.categories');
-
 Route::get('/Admin/Produit', [ProductsController::class, 'index'])->name('Admin.produit');
 route::post('/Admin/Produit', [ProductsController::class, 'store'])->name('insert.produit');
 Route::put('/Admin/Produit/{product}', [ProductsController::class, 'update'])->name('update.produit');
@@ -43,16 +43,21 @@ Route::delete('Admin/Theme/{theme}', [ThemeController::class, 'destroy'])->name(
 Route::get('/Admin/tripApproved', [AdminController::class, 'tripApproved'])->name('tripApproved');
 Route::patch('/Admin/Published/{trip}' ,[AdminController::class ,'tripPublished'])->name('publier');
 Route::delete('/Admin/TripDelete/{theme}',[AdminController::class ,'tripDelete'])->name('trip.delete');
+});
+
 // --------------------------------------------------------------------------------------------
 
+Route::middleware(['auth', 'role:Guide'])->group(function () {
 Route::get('Guide/Dashboard',[GuideController::class,'index'])->name('Guide.dashboard');
 Route::get('/Guide/Voyages' ,[VoyageController::class , 'index'])->name('Guide.voyages');
 Route::post('/Guide/Voyages',[VoyageController::class, 'store'])->name('insert.voyages');
 Route::put('/Guide/Voyages/{voyage}',[VoyageController::class, 'update'])->name('update.voyages');
 Route::delete('/Guide/Voyages/{voyage}',[VoyageController::class, 'destroy'])->name('destroy.voyages');
+});
 
 // --------------------------------------------------------------------------------------------------
 
+Route::middleware(['auth', 'role:Client'])->group(function () {
 Route::get('/client/panier', [PanierController::class, 'index'])->name('client.panier');
 Route::get('/client/Trips', [ClientController::class, 'tripIndex'])->name('client.trip');
 Route::get('/client/reservation/{trip}', [ReservationController::class, 'index'])->name('client.trip.show');
@@ -68,4 +73,8 @@ Route::get('/Client/ArticleDetail/{articleId}', [CommentaireController::class, '
 Route::post('/Client/AddComment/{Article}', [CommentaireController::class,'store'])->name('commentStore');
 Route::put('/Client/UpdateComment/{commentaire}' ,[CommentaireController::class,'update'])->name('commentUpdate');
 Route::delete('/Client/deleteComment/{commentaire}' ,[CommentaireController::class,'destroy'])->name('commentDelete');
+Route::get('/Articles/{themeId}', [ArticleController::class, 'index'])->name('articles');
+});
+
+
 // ----------------------------------------------------------------------------------------------------------
