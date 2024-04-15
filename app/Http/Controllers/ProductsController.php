@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\Products;
+use App\Models\Theme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,21 +22,22 @@ class ProductsController extends Controller
 
 
 
-public function filterSearch(Request $request)
-{
-    $categories = Categories::all();
-    $products = Products::query();
-    $search = $request->input('search');
-    $categoryFilter = $request->input('Categorie');
-    if ($search) {
-        $products->where('productName', 'like', '%' . $search . '%');
-    }
-    if ($categoryFilter && $categoryFilter !== 'Tout') {
-        $products->where('id_Category', $categoryFilter);
-    }
-    $products = $products->get();
-    return view('welcome', compact('products','categories'));
-}
+// public function filterSearch(Request $request)
+// {
+//     $themes = Theme::with('tag')->get();
+//     $categories = Categories::all();
+//     $products = Products::query();
+//     $search = $request->input('search');
+//     $categoryFilter = $request->input('Categorie');
+//     if ($search) {
+//         $products->where('productName', 'like', '%' . $search . '%');
+//     }
+//     if ($categoryFilter && $categoryFilter !== 'Tout') {
+//         $products->where('id_Category', $categoryFilter);
+//     }
+//     $products = $products->paginate(4);
+//     return view('welcome', compact('products','categories','themes'));
+// }
 
 
     /**

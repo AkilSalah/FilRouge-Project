@@ -25,6 +25,7 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/', [ClientController::class, 'index'])->name('welcome');
 
 
+
     // Routes pour les administrateurs
     Route::middleware(['auth','role:Admin'])->group(function () {
         Route::get('/Admin/Dashboard', [AdminController::class,'index'])->name('Admin.dashboard');
@@ -47,7 +48,7 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
 
     
     // Routes pour les guides
-    Route::middleware([RoleMiddleware::class, 'role:Guide'])->group(function () {
+    Route::middleware(['auth','role:Guide'])->group(function () {
         Route::get('Guide/Dashboard',[GuideController::class,'index'])->name('Guide.dashboard');
         Route::get('/Guide/Voyages' ,[VoyageController::class , 'index'])->name('Guide.voyages');
         Route::post('/Guide/Voyages',[VoyageController::class, 'store'])->name('insert.voyages');
@@ -57,14 +58,15 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
 
     
     // Routes pour les clients
-    Route::middleware([RoleMiddleware::class, 'role:Client'])->group(function () {
+    Route::middleware(['auth','role:Client'])->group(function () {
         Route::get('/client/panier', [PanierController::class, 'index'])->name('client.panier');
         Route::get('/client/Trips', [ClientController::class, 'tripIndex'])->name('client.trip');
         Route::get('/client/reservation/{trip}', [ReservationController::class, 'index'])->name('client.trip.show');
         Route::post('/client/reservation', [ReservationController::class,'store'])->name('client.store');
         Route::post('Client/AddToCart/{productId}',[ClientController::class,'store'])->name('add_to_cart');
         Route::get('Client/Home',[ClientController::class,'index'])->name('Client');
-        Route::get('Client/fetch',[ProductsController::class,'filterSearch'])->name('Client.fetch');
+        Route::get('Client/ProductDetails/{ProductId}',[ClientController::class,'create'])->name('ProductDetails');
+        Route::get('/search',[ClientController::class,'search'])->name('Client.fetch');
         Route::delete('Client/Panier/{idProduct}' ,[PanierController::class , 'deleteFromPanier'])->name('deleteFromPanier');
         Route::post('/Client/AddArticle' ,[ArticleController::class,'store'])->name('storeArticle');
         Route::put('/Client/UpdateArticle/{article}' ,[ArticleController::class,'update'])->name('updateArticle');

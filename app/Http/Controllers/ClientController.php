@@ -20,9 +20,29 @@ class ClientController extends Controller
     {
         $themes = Theme::with('tag')->get();
         $categories = Categories::all();
-        $products = Products::paginate(4);
+        $products = Products::query();
+        
+        $products = $products->paginate(4);
+
         return view('welcome',compact('products','categories','themes'));
     }
+    public function search(Request $request)
+    {
+        $query = $request->input('search');
+        
+        $products = Products::with('category')
+            ->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('productName', 'like', "%$query%")
+                             ->orWhereHas('category', function ($categoryQuery) use ($query) {
+                                 $categoryQuery->where('categoryName', 'like', "%$query%");
+                             });
+            })
+            ->paginate(4);
+        
+        return response()->json($products);
+    }
+    
+    
 
     public function tripIndex(){
         $trips = Voyage::with('guide.user')
@@ -35,9 +55,11 @@ class ClientController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($ProductId)
     {
-        //
+        $product = Products::findOrFail($ProductId);
+        $productDetails = Products::where('id',$product->id)->first();
+        return view('Client.productDetails',compact('productDetails'));
     }
 
     /**
@@ -58,6 +80,8 @@ public function store(Request $request, $productId)
 
         $clientPanier = $client->panier;
 
+        $quantity = $request->input('quantity');
+        // dd($quantity);
         $existingCartItem = $clientPanier->products()
             ->where('produit_id', $productId)
             ->first();
@@ -65,7 +89,7 @@ public function store(Request $request, $productId)
             $existingCartItem->pivot->quantite++;
             $existingCartItem->pivot->save();
         } else {
-            $clientPanier->products()->attach($productId, ['quantite' => 1]);
+            $clientPanier->products()->attach($productId, ['quantite' => $quantity]);
         }
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');

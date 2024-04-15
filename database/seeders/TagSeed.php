@@ -2,16 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\Tag;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Categories;
 
-class CategorySeed extends Seeder
+class TagSeed extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Categories::factory()->count(10)->create();
+        Tag::factory()->count(15)->create();
     }
 }
