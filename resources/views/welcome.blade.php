@@ -307,7 +307,8 @@
             <div class="p-4 mx-auto lg:max-w-7xl sm:max-w-full">
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 @foreach ($products as $product)
-                <div class="bg-blue-100 rounded-2xl p-6 hover:-translate-y-2 transition-all relative">
+                <a href="">
+                  <div class="bg-blue-100 rounded-2xl p-6 hover:-translate-y-2 transition-all relative">
                   <div class="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18px" class="fill-gray-800 inline-block" viewBox="0 0 64 64">
                       <path
@@ -320,12 +321,13 @@
                   </div>
                   <div>
                     <h3 class="text-lg font-bold text-gray-800">{{$product->productName}} </h3>
-                    <p class="text-gray-500 text-sm mt-2">{{$product->productDescription}}</p>
+                    <p class="text-gray-500 text-sm mt-2">{{ substr($product->productDescription, 0, 60) }}</p>
                     <div class="flex items-center justify-between ">
                       <div>
                         <h4 class="text-lg text-gray-700 font-bold mt-4">{{$product->productPrice}} DH</h4>
                       </div>
-                      <div class="mt-5" >
+                      
+                      {{-- <div class="mt-5" >
                         <form action="{{ route('add_to_cart', $product->id) }}" method="POST" >
                           @csrf
                           <button type="submit" class="py-2.5  px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
@@ -335,14 +337,17 @@
                           Add to cart
                         </button>
                         </form>
-                      </div>
+                      </div> --}}
                     </div>
                   </div>
                 </div>
+                </a>
                 @endforeach
               </div>
             </div>
           </div>
+          <div class="w-11/12 mx-auto my-8">{{ $products->links() }}</div>
+
         </section>
 
         {{-- blog section  --}}

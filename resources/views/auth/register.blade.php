@@ -21,7 +21,7 @@
                 @csrf
                 <div class="mb-12">
                   <h3 class="text-3xl font-extrabold">Sign up</h3>
-                  <p class="text-sm mt-4 "> have an account <a href="javascript:void(0);" class="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Register here</a></p>
+                  <p class="text-sm mt-4 "> have an account <a href="{{ route('login.create') }}" class="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Login here</a></p>
 
                 </div>
                 <div>

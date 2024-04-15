@@ -20,7 +20,7 @@ class ClientController extends Controller
     {
         $themes = Theme::with('tag')->get();
         $categories = Categories::all();
-        $products = Products::get();
+        $products = Products::paginate(4);
         return view('welcome',compact('products','categories','themes'));
     }
 
