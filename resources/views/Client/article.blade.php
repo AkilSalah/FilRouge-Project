@@ -25,12 +25,16 @@
                 </div>
             </div>
             <div>
-                @foreach ($tags as $tag)
-                <button class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">{{$tag->tag}}</button>
-                @endforeach
+                <form action="{{ route('articles', $theme->id) }}" method="GET" id="filterButton" class="flex flex-wrap gap-2">
+                    @foreach ($tags as $tag)
+                        <button type="submit" name="tag" value="{{ $tag->id }}"
+                                class="filterButton bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">
+                            {{ $tag->tag }}
+                        </button>
+                    @endforeach
+                </form>
+                                                           
             </div>
-            {{-- @dd($tags) --}}
-
 
             <!-- Main modal -->
             <div id="crud-modal" tabindex="-1" aria-hidden="true"
@@ -110,7 +114,7 @@
                 </div>
             </div>
 
-            <div class="grid gap-6 lg:grid-cols-3">
+        <div class=" Alll grid mt-10 gap-6 lg:grid-cols-3">
                 @foreach ($articles as $article)
                 <div class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
                     <div id="dropdownMenuIconHorizontalButton_{{ $article->id }}" data-dropdown-toggle="dropdownDotsHorizontal_{{ $article->id }}" class=" bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
@@ -118,7 +122,7 @@
                             <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                         </svg>
                     </div>
-            <div id="dropdownDotsHorizontal_{{ $article->id }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <div id="dropdownDotsHorizontal_{{ $article->id }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                 <ul class="py-2" aria-labelledby="dropdownMenuIconHorizontalButton_{{ $article->id }}">
                 <li>
                     <a data-modal-target="crud-modal_{{ $article->id }}" data-modal-toggle="crud-modal_{{ $article->id }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" type="button" >Edit</a>
@@ -210,8 +214,43 @@
             </div>
         </section>
     </div>
-   
-    
-    
-       
+
 @endsection
+{{-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.filterButton').on('click', function() {
+            var tag = $(this).val();
+
+            $.ajax({
+                url: '{{ route("Client.filter") }}', 
+                method: 'GET',
+                data: {
+                    tag: tag
+                },
+                dataType: 'json', 
+                success: function(response) {
+                   
+                    $('.Alll').empty(); 
+                    response.forEach(article => {
+                        const html = `
+                        
+
+
+                       
+                        `;
+                    
+                        $('.Alll').append(html);
+                    });
+                },
+                error: function(xhr) {
+                    console.log('Erreur lors de la récupération des articles filtrés :', xhr.responseText);
+                }
+            });
+
+        });
+
+       
+    });
+</script> --}}

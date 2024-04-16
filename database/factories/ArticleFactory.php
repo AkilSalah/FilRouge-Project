@@ -19,17 +19,17 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
-        $tagIds = Tag::pluck('id')->toArray();
-        $themeIds = Theme::pluck('id')->toArray();
-        $clientIds = Client::pluck('id')->toArray();
+        $theme = Theme::inRandomOrder()->first();
+
+        $tagIds = $theme->tag()->pluck('id')->toArray();
 
         return [
             'title' => $this->faker->word,
             'description' => $this->faker->paragraph,
             'image' => $this->faker->imageUrl(640, 480),
-            'articleTags' => $this->faker->randomElements($tagIds, rand(1, 5)), 
-            'theme_id' => $this->faker->randomElement($themeIds), 
-            'client_id' => $this->faker->randomElement($clientIds), 
+            'theme_id' => $theme->id, 
+            'client_id' => Client::inRandomOrder()->first()->id, 
+            'articleTags' =>json_encode($this->faker->randomElements($tagIds, rand(1, count($tagIds)))) , 
         ];
     }
 }

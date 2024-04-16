@@ -10,6 +10,7 @@ use App\Http\Controllers\GuideController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\stripeController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\VoyageController;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,7 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::get('Client/Home',[ClientController::class,'index'])->name('Client');
         Route::get('Client/ProductDetails/{ProductId}',[ClientController::class,'create'])->name('ProductDetails');
         Route::get('/search',[ClientController::class,'search'])->name('Client.fetch');
+        Route::get('/filter', [ArticleController::class, 'filter'])->name('Client.filter');
         Route::delete('Client/Panier/{idProduct}' ,[PanierController::class , 'deleteFromPanier'])->name('deleteFromPanier');
         Route::post('/Client/AddArticle' ,[ArticleController::class,'store'])->name('storeArticle');
         Route::put('/Client/UpdateArticle/{article}' ,[ArticleController::class,'update'])->name('updateArticle');
@@ -75,7 +77,11 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::post('/Client/AddComment/{Article}', [CommentaireController::class,'store'])->name('commentStore');
         Route::put('/Client/UpdateComment/{commentaire}' ,[CommentaireController::class,'update'])->name('commentUpdate');
         Route::delete('/Client/deleteComment/{commentaire}' ,[CommentaireController::class,'destroy'])->name('commentDelete');
-        Route::get('/Articles/{themeId}', [ArticleController::class, 'index'])->name('articles');
+        Route::get('/Client/Article/theme={themeId}', [ArticleController::class, 'index'])->name('articles');
+
+        Route::get('/checkout', [stripeController::class, 'checkout'])->name('checkout');
+        Route::post('/session', [stripeController::class,'session'])->name('session');
+        Route::get('/success', [stripeController::class,'success'] )->name('success');
     });
 
 

@@ -70,8 +70,12 @@
           <li class="flex flex-wrap gap-4 text-md py-4">Tax <span class="ml-auto font-bold">4.00 DH</span></li>
           <li class="flex flex-wrap gap-4 text-md py-4 font-bold">Total <span class="ml-auto">  {{$sumTotal}} DH</span></li>
         </ul>
-        <button type="button" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
-          out</button>
+        <form action="{{ route('checkout') }}"  method="GET">
+          @csrf
+          <button type="submit" class="mt-6 text-md px-6 py-2.5 w-full bg-blue-600 hover:bg-blue-700 text-white rounded">Check
+          out</button> 
+        </form>
+       
       </div>
     </div>
   </div>

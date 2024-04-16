@@ -21,7 +21,6 @@ class ClientController extends Controller
         $themes = Theme::with('tag')->get();
         $categories = Categories::all();
         $products = Products::query();
-        
         $products = $products->paginate(4);
 
         return view('welcome',compact('products','categories','themes'));

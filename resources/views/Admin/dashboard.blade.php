@@ -8,32 +8,28 @@ Dashboard
         <div class="left">
             <h1>Dashboard</h1>
         </div>
-        <a href="#" class="btn-download">
-            <i class='bx bxs-cloud-download'></i>
-            <span class="text">Download PDF</span>
-        </a>
     </div>
 
     <ul class="box-info">
         <li>
-            <i class='bx bxs-calendar-check'></i>
+            <i class='bx bxs-cart'></i> 
             <span class="text">
-                <h3>1020</h3>
-                <p>New Order</p>
+                <h3>{{$products}}</h3>
+                <p>Total products</p>
             </span>
         </li>
         <li>
-            <i class='bx bxs-group'></i>
+            <i class='bx bxs-tag'></i> 
             <span class="text">
-                <h3>2834</h3>
-                <p>Visitors</p>
+                <h3>{{$category}}</h3>
+                <p>Categories</p>
             </span>
         </li>
         <li>
-            <i class='bx bxs-dollar-circle'></i>
+            <i class='bx bxs-basket'></i> 
             <span class="text">
-                <h3>$2543</h3>
-                <p>Total Sales</p>
+                <h3>{{$voyage}}</h3>
+                <p>Voyages</p>
             </span>
         </li>
     </ul>
@@ -50,51 +46,26 @@ Dashboard
                 <thead>
                     <tr>
                         <th>User</th>
-                        <th>Date Order</th>
-                        <th>Status</th>
+                        <th>Role</th>
+                        <th class="pl-3">Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    @foreach ($users as $user)
+                      <tr>
                         <td>
-                            <img src="img/people.png">
-                            <p>John Doe</p>
+                            <p>{{$user->Name}}</p>
                         </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status completed">Completed</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="img/people.png">
-                            <p>John Doe</p>
+                        <td>{{$user->role}}</td>
+                        <td >
+                            <span class="status @if($user->status === 'Unblocked') completed  @else pending @endif">
+                                {{$user->status}}
+                            </span>
                         </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="img/people.png">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status process">Process</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="img/people.png">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="img/people.png">
-                            <p>John Doe</p>
-                        </td>
-                        <td>01-10-2021</td>
-                        <td><span class="status completed">Completed</span></td>
-                    </tr>
+                                            </tr>   
+                    @endforeach
+                   
+                   
                 </tbody>
             </table>
         </div>

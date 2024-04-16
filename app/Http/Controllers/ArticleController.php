@@ -16,13 +16,38 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($themeId)
-    {
-        $theme = Theme::find($themeId);
-        $tags = Tag::where('theme_id' , $themeId)->get();
-        $articles = Article::with('client.user')->where('theme_id',$themeId)->get();
-        return view('Client.article', compact('theme' , 'articles', 'tags'));
+    public function index(Request $request, $themeId)
+{
+    $theme = Theme::find($themeId);
+    $tags = Tag::where('theme_id', $themeId)->get();
+    
+    $articlesQuery = Article::with('client.user')->where('theme_id', $themeId);
+
+    if ($request->has('tag')) {
+        $tagId = $request->input('tag');
+        $articlesQuery->where('articleTags', 'LIKE', '%' . $tagId . '%');
     }
+
+    $articles = $articlesQuery->get();
+
+    return view('Client.article', compact('theme', 'articles', 'tags'));
+}
+
+
+
+    // public function filter(Request $request)
+    // {
+       
+    //     $tag = $request->input('tag');
+    //     $articles = Article::whereJsonContains('articleTags', $tag)->get();
+        
+       
+    
+    //     return response()->json($articles);
+    // }
+    
+    
+    
 
 
     /**

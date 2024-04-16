@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Categories;
+use App\Models\Products;
+use App\Models\User;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
 
@@ -13,7 +16,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('Admin.dashboard');
+        $products = Products::count();
+        $category = Categories::count();
+        $voyage = Voyage::count();
+        $users = User::where('role', 'Client')
+        ->orWhere('role', 'Guide')
+        ->get();
+       return view('Admin.dashboard',compact('products', 'category', 'voyage','users'));
     }
 
     public function tripApproved(){

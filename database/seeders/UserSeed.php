@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Theme;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ThemeSeed extends Seeder
+class UserSeed extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-            Theme::factory()->count(3)->create();
+        User::factory()->count(8)->withClient()->create();
     }
 }
