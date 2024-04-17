@@ -62,6 +62,10 @@
                     </a>
                   </div>
                 </div>
+                <div class="mt-8">
+                <x-session />
+                </div>
+
                 <div class="mt-12">
                   <button type="submit" class="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
                     Sign in

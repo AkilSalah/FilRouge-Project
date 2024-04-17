@@ -71,8 +71,8 @@ class ProductsController extends Controller
             'productImage' => $relativeImagePath,
             'productDescription' => $request->description
         ]);
+        return redirect()->back()->with('message', 'Product added successfully');
 
-        return redirect()->back();
 
     }
 
@@ -139,7 +139,7 @@ public function update(Request $request, Products $product)
     public function destroy(Products $product)
     {
         $product->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Product has been deleted successfully' );
     }
 
 }

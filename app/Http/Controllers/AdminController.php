@@ -26,7 +26,6 @@ class AdminController extends Controller
     }
 
     public function tripApproved(){
-
         $trips = Voyage::with('guide.user')->where('is_published' , 0)->get();
         return view('Admin.tripApproved',compact('trips'));
     }
@@ -36,13 +35,13 @@ class AdminController extends Controller
         $trip->update([
             'is_published' => 1,
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'The trip has been published successfully.');
     }
 
     public function tripDelete($trip){
         $trip = Voyage::findOrFail($trip);
         $trip->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'The trip has been deleted successfully.');
     }
 
     public function blockAccess(Request $request, $userId)
@@ -57,7 +56,7 @@ class AdminController extends Controller
                'status' => 'Unblocked',
             ]);
         }
-        return redirect()->back()->with('success', 'L\'accès de l\'utilisateur a été mis à jour avec succès.');
+        return redirect()->back()->with('success', 'User access has been successfully updated.');
     }
 
     /**

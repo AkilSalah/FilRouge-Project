@@ -277,29 +277,7 @@ body {
 	object-fit: cover;
 	border-radius: 50%;
 }
-#content nav .switch-mode {
-	display: block;
-	min-width: 50px;
-	height: 25px;
-	border-radius: 25px;
-	background: var(--grey);
-	cursor: pointer;
-	position: relative;
-}
-#content nav .switch-mode::before {
-	content: '';
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	bottom: 2px;
-	width: calc(25px - 4px);
-	background: var(--blue);
-	border-radius: 50%;
-	transition: all .3s ease;
-}
-#content nav #switch-mode:checked + .switch-mode::before {
-	left: calc(100% - (25px - 4px) - 2px);
-}
+
 /* NAVBAR */
 
 

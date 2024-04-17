@@ -16,12 +16,9 @@
 
         </div>
       </div>
-    @if (session('success'))
-        <div class="bg-green-200 text-green-700 mt-4 p-3 mb-3 rounded-md">{{ session('success') }}</div>
-    @endif
-    @if (session('error'))
-        <div class="bg-red-200 text-red-700 p-3 mb-3 mt-4 rounded-md">{{ session('error') }}</div>
-    @endif
+      <div class="mt-8 mb-4">
+        <x-session />
+        </div>
     <div class="bg-white py-8">
         <div class="container mx-auto px-4 flex flex-col justify-around md:flex-row">
             <div class="w-full md:w-3/4 px-4">

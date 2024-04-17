@@ -13,18 +13,21 @@ class PanierController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $user = Auth::user()->id;
-    $idClient = Client::where('id_User', $user)->first(); 
-    $panier = Panier::where('id_Client', $idClient->id)->first();
-
-    if ($panier) {
-        $products = $panier->products;
-        return view('Client.panier', compact('products'));
-    } else {
-        return view('Client.panier', compact('products'))->with('message', 'Votre panier est vide.');
+    {
+        $user = Auth::user()->id;
+        $idClient = Client::where('id_User', $user)->first();
+        $panier = Panier::where('id_Client', $idClient->id)->first();
+    
+        if ($panier) {
+            $products = $panier->products;
+            $message = null;
+        } else {
+            $products = [];
+            $message = 'Votre panier est vide.';
+        }
+        return view('Client.panier', compact('products', 'message'));
     }
-}
+    
 
 
     public function deleteFromPanier($idProduct) {
@@ -38,7 +41,7 @@ class PanierController extends Controller
                     $product->pivot->delete();
                 }
             }
-            return redirect()->back()->with('message', 'Produit supprimé du panier.');
+            return redirect()->back()->with('message', 'Product deleted successfully');
         } else {
             return redirect()->back()->with('message', 'Votre panier est vide.');
         }

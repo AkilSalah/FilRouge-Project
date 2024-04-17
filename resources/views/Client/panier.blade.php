@@ -12,9 +12,16 @@
       <div class="lg:col-span-2 p-10 bg-white overflow-x-auto">
         <div class="flex border-b pb-4">
           <h2 class="text-2xl font-extrabold text-[#333] flex-1">Shopping Cart</h2>
-          <h3 class="text-xl font-extrabold text-[#333]"> {{$products->count()}} Products</h3>
-        </div>
+          @if (!empty($products) && is_countable($products))
+          <h3 class="text-xl font-extrabold text-[#333]">{{ count($products) }} Products</h3>
+          @else
+          <h3 class="text-xl font-extrabold text-[#333]">0 Products</h3>
+          @endif
+            </div>
         <div>
+          <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
+            <span class="font-medium">{{$message}} </span>
+          </div>
           <table class="mt-6 w-full border-collapse divide-y">
             <thead class="whitespace-nowrap text-left">
               <tr>
@@ -24,7 +31,9 @@
               </tr>
             </thead>
             <tbody class="whitespace-nowrap divide-y">
+             
               @foreach ($products as $product)
+              
               <tr>
                 <td class="py-6 px-4">
                   <div class="flex items-center gap-6 w-max">

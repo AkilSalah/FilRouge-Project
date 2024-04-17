@@ -45,7 +45,7 @@ class CommentaireController extends Controller
             'commentaire' => $validateData['comment'],
             'article_id' => $article->id,
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Comment added successfully!');
     }
 
     /**
@@ -76,7 +76,7 @@ class CommentaireController extends Controller
         $commentaire->update([
             'commentaire' => $validateData['comment'],
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Comment updated successfully!');
 
     }
 
@@ -89,6 +89,6 @@ class CommentaireController extends Controller
             abort(403, 'Unauthorized action.');
         }
         $commentaire->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Comment deleted successfully!');
     }
 }

@@ -84,7 +84,7 @@ class ArticleController extends Controller
 
         ]);
         
-        return redirect()->back();
+        return redirect()->back()->with('success', 'The article has been created successfully.');
 
     }
 
@@ -137,7 +137,7 @@ class ArticleController extends Controller
             'articleTags' =>json_encode($tagIds)
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'The article has been updated successfully.');
     }
 
 
@@ -153,6 +153,6 @@ class ArticleController extends Controller
         }
 
         $article->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'The article has been deleted successfully.');
     }
 }

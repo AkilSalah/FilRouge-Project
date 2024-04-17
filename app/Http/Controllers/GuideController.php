@@ -37,13 +37,13 @@ class GuideController extends Controller
         $reservation->update([
             'status' => $request->status,
         ]);
+        return redirect()->back()->with('success', 'Reservation accepted successfully!');
 
-        return redirect()->back();
     }
     public function deleteReservation( $tripReservation ){
         $reservation = Reservation::findOrFail($tripReservation);
         $reservation->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Reservation deleted successfully!');
     }
 
 

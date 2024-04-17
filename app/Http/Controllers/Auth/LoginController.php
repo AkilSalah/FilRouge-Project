@@ -44,11 +44,12 @@ class LoginController extends Controller
             $user = Auth::user();
             if ($user->role === 'Admin') {
                 return redirect()->route('Admin.dashboard');
-            } elseif ($user->role === 'Guide') {
+            } elseif ($user->role === 'Guide' && $user->status === 'Unblocked') {
                 return redirect()->route('Guide.dashboard');
-            } elseif ($user->role === 'Client') {
+            } elseif ($user->role === 'Client' && $user->status === 'Unblocked') {
                 return redirect()->route('welcome');
             }
+            return redirect()->route('login.create')->with('error', 'Erreur lors de la connexion .');
         }
     
     }

@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\stripeController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\ticketController;
 use App\Http\Controllers\VoyageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
@@ -83,7 +84,8 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::put('/Client/UpdateComment/{commentaire}' ,[CommentaireController::class,'update'])->name('commentUpdate');
         Route::delete('/Client/deleteComment/{commentaire}' ,[CommentaireController::class,'destroy'])->name('commentDelete');
         Route::get('/Client/Article/theme={themeId}', [ArticleController::class, 'index'])->name('articles');
-
+        Route::get('/client/Ticket', [ticketController::class, 'index1'])->name('Client.ticket');
+        Route::get('/client/GetTicket', [ticketController::class, 'index'])->name('Client.getTicket');
         Route::get('/checkout', [stripeController::class, 'checkout'])->name('checkout');
         Route::post('/session', [stripeController::class,'session'])->name('session');
         Route::get('/checkout/success', [StripeController::class, 'paymentSuccess'])->name('checkout.success');

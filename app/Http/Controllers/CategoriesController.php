@@ -36,7 +36,7 @@ class CategoriesController extends Controller
             'categoryName' => $request->categorieName,
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Category has been created successfully.');
     }
 
     /**
@@ -67,8 +67,8 @@ class CategoriesController extends Controller
         $categorie->update([
             'categoryName' => $validatedData['categorieName'],
         ]);
+        return redirect()->back()->with('success', 'Category has been updated successfully.');
     
-        return redirect()->back()->with('success', 'Catégorie mise à jour avec succès.');
     }
     
     
@@ -79,6 +79,6 @@ class CategoriesController extends Controller
     public function destroy(Categories $categorie)
     {
         $categorie->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Category has been deleted successfully.');
     }
 }

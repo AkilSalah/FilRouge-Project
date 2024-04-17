@@ -59,7 +59,7 @@ class VoyageController extends Controller
             'date' => $request->date,
             'lieu' => $request->lieu,
         ]);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Voyage mis à jour avec succès.');
     }
 
     /**
@@ -107,8 +107,8 @@ class VoyageController extends Controller
         $voyage->lieu = $request->lieu;
     
         $voyage->save();
-    
-        return redirect()->back();
+
+        return redirect()->back()->with('success', 'Trip has been updated successfully.');
     }
     
 
@@ -118,6 +118,6 @@ class VoyageController extends Controller
     public function destroy(Voyage $voyage)
     {
         $voyage->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Voyage has been deleted successfully.');
     }
 }

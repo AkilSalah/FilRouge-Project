@@ -85,7 +85,7 @@ public function store(Request $request, $productId)
             ->where('produit_id', $productId)
             ->first();
         if ($existingCartItem) {
-            $existingCartItem->pivot->quantite++;
+            $existingCartItem->pivot->quantite+=$quantity;
             $existingCartItem->pivot->save();
         } else {
             $clientPanier->products()->attach($productId, ['quantite' => $quantity]);
@@ -93,7 +93,7 @@ public function store(Request $request, $productId)
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     } else {
-        return redirect()->route('login')->with('error', 'You must be logged in to add products to cart.');
+        return redirect()->route('login.create')->with('error', 'You must be logged in to add products to cart.');
     }
 }
 

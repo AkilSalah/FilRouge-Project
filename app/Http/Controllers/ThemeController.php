@@ -53,8 +53,8 @@ class ThemeController extends Controller
                 'tag' => $tag,
             ]);
         }
-        return redirect()->back();
-        
+
+        return redirect()->back()->with('message', 'Theme added successfully');
         
     }
 
@@ -118,8 +118,8 @@ class ThemeController extends Controller
             ]);
         }
     }
+    return redirect()->back()->with('success', 'Theme has been updated successfully.');
 
-    return redirect()->back();
 }
 
 
@@ -129,6 +129,6 @@ class ThemeController extends Controller
     public function destroy(Theme $theme)
     {
         $theme->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Theme has been deleted successfully.');
     }
 }

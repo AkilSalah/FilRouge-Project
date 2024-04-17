@@ -9,8 +9,10 @@
     <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon" >
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet">
      <script defer src="assets/js/alpine.min.js"></script>
+     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <title>Client| @yield('title')</title>
     @vite(['resources/js/script.js'])
+    
 
 </head>
 <body>
