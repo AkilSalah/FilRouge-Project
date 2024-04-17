@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Guide;
+use App\Models\Reservation;
+use App\Models\Voyage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GuideController extends Controller
 {
@@ -12,8 +15,37 @@ class GuideController extends Controller
      */
     public function index()
     {
-        return view('Guide.dashboard');
+        $guide = Auth::user()->id;
+        $guideId = Guide::where('id_User', $guide)->first();
+        $trips = Voyage::withCount('reservation')
+        ->where('guide_id', $guideId->id)
+        ->get();
+        return view('Guide.dashboard',compact('trips'));
     }
+
+    public function acceptation(Request $request)
+    {
+     $guide = Auth::user()->id;
+     $guideId = Guide::where('id_User', $guide)->first(); 
+    $tripReserves = Reservation::with('client.user','voyage.guide')
+    ->where('status', false)->get();
+    return view('Guide.acceptation', compact('tripReserves'));
+    }
+
+    public function acceptReservation(Request $request ,$tripReservation ){
+        $reservation = Reservation::findOrFail($tripReservation);
+        $reservation->update([
+            'status' => $request->status,
+        ]);
+
+        return redirect()->back();
+    }
+    public function deleteReservation( $tripReservation ){
+        $reservation = Reservation::findOrFail($tripReservation);
+        $reservation->delete();
+        return redirect()->back();
+    }
+
 
     /**
      * Show the form for creating a new resource.

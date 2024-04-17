@@ -45,6 +45,21 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    public function blockAccess(Request $request, $userId)
+    {
+        $user = User::findOrFail($userId);
+        if($user->status == 'Unblocked'){
+         $user->update([
+            'status' => 'Blocked',
+        ]);   
+        }else{
+            $user->update([
+               'status' => 'Unblocked',
+            ]);
+        }
+        return redirect()->back()->with('success', 'L\'accès de l\'utilisateur a été mis à jour avec succès.');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -82,7 +97,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, Admin $admin)
     {
-        //
+   
     }
 
     /**

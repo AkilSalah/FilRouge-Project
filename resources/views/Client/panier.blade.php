@@ -49,6 +49,7 @@
                     <button type="button" class="bg-transparent px-4 py-2 font-semibold text-[#333] text-md">
                       {{$product->pivot->quantite}}
                     </button>
+                    <input type="hidden" name="quantity[]" value="{{$product->pivot->quantite}}">
                    
                   </div>
                 </td>
@@ -57,7 +58,8 @@
                   @php
                       $sumTotal += $product->productPrice * $product->pivot->quantite;
                   @endphp
-                </td>
+                <input type="hidden" name="totalAmount" value="{{ $sumTotal }}">
+              </td>
               </tr>
               @endforeach
             </tbody>

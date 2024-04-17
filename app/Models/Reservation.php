@@ -11,6 +11,7 @@ class Reservation extends Model
     protected $fillable = [
         'Client_id',
         'voyage_id',
+        'status',
     ];
     public function client(){
         return $this->belongsTo(Client::class, 'Client_id');

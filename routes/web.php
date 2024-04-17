@@ -45,6 +45,8 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::get('/Admin/tripApproved', [AdminController::class, 'tripApproved'])->name('tripApproved');
         Route::patch('/Admin/Published/{trip}' ,[AdminController::class ,'tripPublished'])->name('publier');
         Route::delete('/Admin/TripDelete/{theme}',[AdminController::class ,'tripDelete'])->name('trip.delete');
+        Route::patch('/Admin/blockAccess/{userId}',[AdminController::class ,'blockAccess'])->name('blockAccess');
+
     });
 
     
@@ -55,6 +57,9 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::post('/Guide/Voyages',[VoyageController::class, 'store'])->name('insert.voyages');
         Route::put('/Guide/Voyages/{voyage}',[VoyageController::class, 'update'])->name('update.voyages');
         Route::delete('/Guide/Voyages/{voyage}',[VoyageController::class, 'destroy'])->name('destroy.voyages');
+        Route::get('/Guide/Reservation' ,[GuideController::class , 'acceptation'])->name('Guide.reservation');
+        Route::patch('/Guide/accepter-reservation/{tripReservation}', [GuideController::class, 'acceptReservation'])->name('guide.accepterReservation');
+        Route::delete('/Guide/delete-reservation/{tripReservation}', [GuideController::class, 'deleteReservation'])->name('guide.delete');
     });
 
     
@@ -81,7 +86,9 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
 
         Route::get('/checkout', [stripeController::class, 'checkout'])->name('checkout');
         Route::post('/session', [stripeController::class,'session'])->name('session');
-        Route::get('/success', [stripeController::class,'success'] )->name('success');
+        Route::get('/checkout/success', [StripeController::class, 'paymentSuccess'])->name('checkout.success');
+        Route::get('/checkout/cancel', [StripeController::class, 'paymentCancel'])->name('checkout.cancel');
+
     });
 
 

@@ -484,6 +484,10 @@ body {
 #content main .table-data .order table tr td .status.pending {
 	background: var(--orange);
 }
+#content main .table-data .order table tr td .status.red {
+	background: var(--red);
+}
+
 
 
 #content main .table-data .todo {

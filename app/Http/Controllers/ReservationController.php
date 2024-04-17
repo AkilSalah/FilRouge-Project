@@ -50,7 +50,7 @@ class ReservationController extends Controller
             ]);
             $trip->nbPlaces -= 1;
             $trip->save();
-            return redirect()->back()->with('success', 'Votre réservation a été effectuée avec succès!');
+            return redirect()->back()->with('success', 'Votre réservation a été effectuée avec succès! veuillez attendez confirmation pour obtenu votre ticket.');
         }else{
             return redirect()->back()->with('error', 'Impossible de créer la réservation. Vérifiez les disponibilités.');
 

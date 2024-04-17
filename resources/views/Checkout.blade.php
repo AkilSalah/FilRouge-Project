@@ -6,6 +6,12 @@
 <div class="font-[sans-serif] bg-gray-50 mt-6 p-6 min-h-screen">
     <div class="max-w-7xl mx-auto">
       <h2 class="text-3xl font-extrabold text-[#333] text-center">Checkout</h2>
+         @if(session('success'))
+        <div class="bg-green-200 text-green-700 mt-4 p-3 mb-3 rounded-md">{{ session('success') }}</div>
+        @endif
+        @if(session('error'))
+        <div class="bg-red-200 text-red-700 p-3 mb-3 mt-4 rounded-md">{{ session('error') }}</div>
+        @endif
       <div class="grid lg:grid-cols-3 gap-8 mt-12">
         <div class="lg:col-span-2">
           <h3 class="text-xl font-bold text-[#333]">Choose your payment method</h3>
@@ -47,17 +53,23 @@
         <div class="lg:border-l lg:pl-8">
           <h3 class="text-xl font-bold text-[#333]">Summary</h3>
           <ul class="text-[#333] mt-6 space-y-4">
-            <li class="flex flex-wrap gap-4 text-sm">Discount (20%) <span class="ml-auto font-bold">$4.00</span></li>
             <li class="flex flex-wrap gap-4 text-sm">Tax <span class="ml-auto font-bold">$4.00</span></li>
-            <li class="flex flex-wrap gap-4 text-base font-bold border-t pt-4">Total <span class="ml-auto">$52.00</span></li>
+            <li class="flex flex-wrap gap-4 text-base font-bold border-t pt-4">Total <span class=" text-gray-900 ml-auto">
+                {{ request('totalAmount') }} DH
+            </span></li>
           </ul>
         </div>
       </div>
       <div class="flex flex-wrap gap-4 mt-10">
-        <button type="button"
-          class="px-6 py-3.5 text-sm bg-transparent border text-[#333] rounded-md hover:bg-gray-100">Pay later</button>
-        <button type="button"
+       <a href="{{ route('client.panier') }}" class="px-6 py-3.5 text-sm bg-transparent border text-[#333] rounded-md hover:bg-gray-100">
+        Pay later
+       </a>
+       <form action="{{ route('checkout') }}" method="GET">
+        @csrf
+    <button type="submit"
           class="px-6 py-3.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700">Submit</button>
+    </form>
+        
       </div>
     </div>
   </div>    

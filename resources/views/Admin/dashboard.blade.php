@@ -38,9 +38,8 @@ Dashboard
     <div class="table-data">
         <div class="order">
             <div class="head">
-                <h3>Recent Orders</h3>
-                <i class='bx bx-search'></i>
-                <i class='bx bx-filter'></i>
+                <h3>Recent Users</h3>
+               
             </div>
             <table>
                 <thead>
@@ -58,11 +57,17 @@ Dashboard
                         </td>
                         <td>{{$user->role}}</td>
                         <td >
-                            <span class="status @if($user->status === 'Unblocked') completed  @else pending @endif">
+                            <form action="{{ route('blockAccess', $user->id) }}" method="POST">
+                                @csrf
+                                @method('patch')
+                                <button type="submit">
+                                 <span class="status @if($user->status === 'Unblocked') completed  @else pending @endif">
                                 {{$user->status}}
-                            </span>
+                            </span>   
+                                </button>
+                            </form>
                         </td>
-                                            </tr>   
+                        </tr>   
                     @endforeach
                    
                    
@@ -73,3 +78,27 @@ Dashboard
     </div>
 </main>
 @endsection
+
+<script>
+    function blockUser(userId) {
+        var formId = '#blockForm' + userId;
+        var statusId = '#status' + userId;
+
+        $.ajax({
+            url: $(formId).attr('action'),
+            type: 'PATCH',
+            data: $(formId).serialize(),
+            success: function(response) {
+                if (response.status === 'Blocked') {
+                    $(statusId).removeClass('pending').addClass('completed').text('Blocked');
+                } else {
+                    $(statusId).removeClass('completed').addClass('pending').text('Unblocked');
+                }
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+                // Gérer l'erreur ici
+            }
+        });
+    }
+</script>
