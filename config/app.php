@@ -13,6 +13,7 @@ return [
     |
     */
 
+
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
@@ -104,6 +105,15 @@ return [
             explode(',', env('APP_PREVIOUS_KEYS', ''))
         ),
     ],
+
+    // 'providers' => [
+
+    //     Barryvdh\DomPDF\ServiceProvider::class,
+    // ],
+    // 'aliases' => [
+
+    //     'PDF' => Barryvd\DomPDF\Facade::class,
+    // ],
 
     /*
     |--------------------------------------------------------------------------

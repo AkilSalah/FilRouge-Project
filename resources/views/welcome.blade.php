@@ -5,7 +5,7 @@
 @section('main')
 
     <!-- ====== Hero Section Start -->
-    <div class="relative bg-white pb-[110px] pt-[120px] dark:bg-dark lg:pt-[70px]">
+    <div class="relative mt-4 bg-white pb-[110px] pt-[120px] dark:bg-dark lg:pt-[70px]">
         <div class="container mx-auto">
             <div class="-mx-4 flex flex-wrap items-center">
                 <div class="w-full px-4 lg:w-5/12">

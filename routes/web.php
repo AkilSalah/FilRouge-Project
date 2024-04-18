@@ -84,8 +84,11 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::put('/Client/UpdateComment/{commentaire}' ,[CommentaireController::class,'update'])->name('commentUpdate');
         Route::delete('/Client/deleteComment/{commentaire}' ,[CommentaireController::class,'destroy'])->name('commentDelete');
         Route::get('/Client/Article/theme={themeId}', [ArticleController::class, 'index'])->name('articles');
-        Route::get('/client/Ticket', [ticketController::class, 'index1'])->name('Client.ticket');
+
         Route::get('/client/GetTicket', [ticketController::class, 'index'])->name('Client.getTicket');
+        // Route::get('/client/Ticket', [ClientController::class, 'ticket'])->name('PdfTicket');
+        Route::get('/client/pdf', [ticketController::class, 'pdf'])->name('pdf');
+
         Route::get('/checkout', [stripeController::class, 'checkout'])->name('checkout');
         Route::post('/session', [stripeController::class,'session'])->name('session');
         Route::get('/checkout/success', [StripeController::class, 'paymentSuccess'])->name('checkout.success');
