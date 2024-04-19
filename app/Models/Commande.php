@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Commande extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'panier_id',
+        'date',
+    ];
+    public function panier(){
+        return $this->belongsTo(Panier::class, 'panier_id');
+    }
 }

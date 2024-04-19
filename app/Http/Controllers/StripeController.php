@@ -1,17 +1,18 @@
 <?php 
  
 namespace App\Http\Controllers;
- 
+
+use App\Models\Client;
+use App\Models\Panier;
 use Illuminate\Http\Request;
- 
+use Illuminate\Support\Facades\Auth;
+use App\Models\Commande;
+
 class StripeController extends Controller
 {
-    public function checkout()
-    {
-        return view('Checkout');
-    }
+    
  
-    public function session(Request $request)
+    public function session(Request $request )
     {
         \Stripe\Stripe::setApiKey(config('stripe.sk'));
  
@@ -35,15 +36,33 @@ class StripeController extends Controller
                  
             ],
             'mode'        => 'payment',
-            'success_url' => route('success'),
+             $success = 'success_url' => route('success'),
             'cancel_url'  => route('client.panier'),
         ]);
- 
+        
         return redirect()->away($session->url);
     }
- 
+
     public function success()
     {
-        return "Thanks for you order You have just completed your payment. The seeler will reach out to you as soon as possible";
+        $user = Auth::user()->id;
+        $idClient = Client::where('id_User', $user)->first();
+        
+            $clientPanier = $idClient->panier;
+            $existingCartItem = $clientPanier->products()->get();
+            if($existingCartItem){
+                $clientPanier->products()->detach();
+            }
+            $commande = new Commande();
+            $commande->panier_id = $clientPanier->id;
+            $commande->date = date('Y-m-d');
+            $commande->save();
+        
+        return view ('Checkout');
     }
+ 
+    // public function success()
+    // {
+    //     return  "Thanks for you order You have just completed your payment. The seeler will reach out to you as soon as possible";
+    // }
 }

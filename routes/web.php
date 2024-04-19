@@ -10,7 +10,7 @@ use App\Http\Controllers\GuideController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\stripeController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ticketController;
 use App\Http\Controllers\VoyageController;
@@ -88,12 +88,13 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::get('/client/GetTicket', [ticketController::class, 'index'])->name('Client.getTicket');
         Route::get('/client/pdf', [ticketController::class, 'pdf'])->name('pdf');
 
-        // Route::get('/checkout', [stripeController::class, 'checkoutShow'])->name('checkout');
+        Route::post('/session', [StripeController::class,'session'])->name('session');
+        Route::get('/success',  [StripeController::class,'success'] )->name('success');
+
+        // Route::get('/success', [stripeController::class, 'success'])->name('success');
         // Route::post('/process-payment', [stripeController::class,'processPayment'])->name('process.payment');
-        // Route::get('/success',  [stripeController::class,'success'] )->name('success');
         // Route::get('/checkout', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
-        Route::post('/session', 'App\Http\Controllers\StripeController@session')->name('session');
-        Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');
+        // Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');
 
     });
 
