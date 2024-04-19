@@ -1,76 +1,73 @@
-@extends('layouts.Client')
-@section('title')
-    Checkout
-@endsection
-@section('main')
-<div class="font-[sans-serif] bg-gray-50 mt-6 p-6 min-h-screen">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl font-extrabold text-[#333] text-center">Checkout</h2>
-         @if(session('success'))
-        <div class="bg-green-200 text-green-700 mt-4 p-3 mb-3 rounded-md">{{ session('success') }}</div>
-        @endif
-        @if(session('error'))
-        <div class="bg-red-200 text-red-700 p-3 mb-3 mt-4 rounded-md">{{ session('error') }}</div>
-        @endif
-      <div class="grid lg:grid-cols-3 gap-8 mt-12">
-        <div class="lg:col-span-2">
-          <h3 class="text-xl font-bold text-[#333]">Choose your payment method</h3>
-          <div class="grid gap-4 sm:grid-cols-2 mt-6">
-            <div class="flex items-center">
-              <input type="radio" class="w-5 h-5 cursor-pointer" id="card"  />
-              <label for="card" class="ml-4 flex gap-2 cursor-pointer">
-                <img src="https://readymadeui.com/images/visa.webp" class="w-12" alt="card1" />
-                <img src="https://readymadeui.com/images/american-express.webp" class="w-12" alt="card2" />
-                <img src="https://readymadeui.com/images/master.webp" class="w-12" alt="card3" />
-              </label>
+{{-- !DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laravel 10 How To Integrate Stripe Payment Gateway</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class='row'>
+            <h1>Laravel 10 How To Integrate Stripe Payment Gateway</h1>
+            <div class='col-md-12'>
+                <div class="card">
+                    <div class="card-header">
+                    Laravel 10 How To Integrate Stripe Payment Gateway
+                    </div>
+                    <div class="card-body">
+                    <table id="cart" class="table table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width:50%">Product</th>
+                            <th style="width:10%">Price</th>
+                            <th style="width:8%">Quantity</th>
+                            <th style="width:22%" class="text-center">Subtotal</th>
+                            <th style="width:10%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-th="Product">
+                                <div class="row">
+                                    <div class="col-sm-3 hidden-xs"><img src="{{ asset('img') }}/1.jpg" width="100" height="100" class="img-responsive"/></div>
+                                    <div class="col-sm-9">
+                                        <h4 class="nomargin">Asus Vivobook 17 Laptop - Intel Core 10th</h4>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-th="Price">$6</td>
+                            <td data-th="Quantity">
+                                <input type="number" value="1" class="form-control quantity cart_update" min="1" />
+                            </td>
+                            <td data-th="Subtotal" class="text-center">$6</td>
+                            <td class="actions" data-th="">
+                                <button class="btn btn-danger btn-sm cart_remove"><i class="fa fa-trash-o"></i> Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" style="text-align:right;"><h3><strong>Total $6</strong></h3></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="text-align:right;">
+                                <form action="/session" method="POST">
+                                <a href="{{ url('/') }}" class="btn btn-danger"> <i class="fa fa-arrow-left"></i> Continue Shopping</a>
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                <input type='hidden' name="total" value="6">
+                                <input type='hidden' name="productname" value="Asus Vivobook 17 Laptop - Intel Core 10th">
+                                <button class="btn btn-success" type="submit" id="checkout-live-button"><i class="fa fa-money"></i> Checkout</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center">
-              <input type="radio" class="w-5 h-5 cursor-pointer" id="paypal" />
-              <label for="paypal" class="ml-4 flex gap-2 cursor-pointer">
-                <img src="https://readymadeui.com/images/paypal.webp" class="w-20" alt="paypalCard" />
-              </label>
-            </div>
-          </div>
-          <form class="mt-8">
-            <div class="grid gap-6">
-              <div class="grid sm:grid-cols-3 gap-6">
-                <input type="number" placeholder="Card number"
-                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border rounded-md focus:border-[#007bff] outline-none" />
-                <input type="number" placeholder="EXP."
-                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border rounded-md focus:border-[#007bff] outline-none" />
-                <input type="number" placeholder="CVV"
-                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border rounded-md focus:border-[#007bff] outline-none" />
-              </div>
-              <div class="sm:col-span-2 grid sm:grid-cols-2 gap-6">
-                <input type="text" placeholder="Name of card holder"
-                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border rounded-md focus:border-[#007bff] outline-none" />
-                <input type="number" placeholder="Postal code"
-                  class="px-4 py-3.5 bg-white text-[#333] w-full text-sm border rounded-md focus:border-[#007bff] outline-none" />
-              </div>
-            </div>
-          </form>
         </div>
-        <div class="lg:border-l lg:pl-8">
-          <h3 class="text-xl font-bold text-[#333]">Summary</h3>
-          <ul class="text-[#333] mt-6 space-y-4">
-            <li class="flex flex-wrap gap-4 text-sm">Tax <span class="ml-auto font-bold">$4.00</span></li>
-            <li class="flex flex-wrap gap-4 text-base font-bold border-t pt-4">Total <span class=" text-gray-900 ml-auto">
-                {{ request('totalAmount') }} DH
-            </span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex flex-wrap gap-4 mt-10">
-       <a href="{{ route('client.panier') }}" class="px-6 py-3.5 text-sm bg-transparent border text-[#333] rounded-md hover:bg-gray-100">
-        Pay later
-       </a>
-       <form action="{{ route('checkout') }}" method="GET">
-        @csrf
-    <button type="submit"
-          class="px-6 py-3.5 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700">Submit</button>
-    </form>
-        
-      </div>
     </div>
-  </div>    
-@endsection
+</body>
+</html> --}}

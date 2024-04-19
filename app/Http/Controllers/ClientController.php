@@ -80,8 +80,9 @@ public function store(Request $request, $productId)
         $clientPanier = $client->panier;
 
         $quantity = $request->input('quantity');
-        // dd($quantity);
+
         $existingCartItem = $clientPanier->products()
+        
             ->where('produit_id', $productId)
             ->first();
         if ($existingCartItem) {

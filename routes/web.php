@@ -86,13 +86,14 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::get('/Client/Article/theme={themeId}', [ArticleController::class, 'index'])->name('articles');
 
         Route::get('/client/GetTicket', [ticketController::class, 'index'])->name('Client.getTicket');
-        // Route::get('/client/Ticket', [ClientController::class, 'ticket'])->name('PdfTicket');
         Route::get('/client/pdf', [ticketController::class, 'pdf'])->name('pdf');
 
-        Route::get('/checkout', [stripeController::class, 'checkout'])->name('checkout');
-        Route::post('/session', [stripeController::class,'session'])->name('session');
-        Route::get('/checkout/success', [StripeController::class, 'paymentSuccess'])->name('checkout.success');
-        Route::get('/checkout/cancel', [StripeController::class, 'paymentCancel'])->name('checkout.cancel');
+        // Route::get('/checkout', [stripeController::class, 'checkoutShow'])->name('checkout');
+        // Route::post('/process-payment', [stripeController::class,'processPayment'])->name('process.payment');
+        // Route::get('/success',  [stripeController::class,'success'] )->name('success');
+        // Route::get('/checkout', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
+        Route::post('/session', 'App\Http\Controllers\StripeController@session')->name('session');
+        Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');
 
     });
 
