@@ -10,7 +10,11 @@
     <title>Admin | @yield('title')</title>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     @vite(['resources/css/style.css','resources/js/script.js'])
-
+    <link
+      rel="shortcut icon"
+      href="/images/pêcheLogo.png"
+      type="image/x-icon"
+    />
 </head>
 <body>
     @include('partials.AdminSideBar')

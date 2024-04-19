@@ -12,7 +12,11 @@
      <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <title>Client| @yield('title')</title>
     @vite(['resources/js/script.js'])
-    
+    <link
+      rel="shortcut icon"
+      href="/images/pêcheLogo.png"
+      type="image/x-icon"
+    />
 
 </head>
 <body>
