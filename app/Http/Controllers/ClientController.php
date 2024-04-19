@@ -26,21 +26,25 @@ class ClientController extends Controller
         return view('welcome',compact('products','categories','themes'));
     }
     public function search(Request $request)
-    {
-        $query = $request->input('search');
-        
-        $products = Products::with('category')
-            ->where(function ($queryBuilder) use ($query) {
-                $queryBuilder->where('productName', 'like', "%$query%")
-                             ->orWhereHas('category', function ($categoryQuery) use ($query) {
-                                 $categoryQuery->where('categoryName', 'like', "%$query%");
-                             });
-            })
-            ->paginate(4);
-        
-        return response()->json($products);
+{
+    $query = $request->input('search');
+    
+    if (empty($query)) {
+        return response()->json(['error' => 'Search query is empty'], 400);
     }
     
+    $products = Products::with('category')
+        ->where(function ($queryBuilder) use ($query) {
+            $queryBuilder->where('productName', 'like', "%$query%")
+                         ->orWhereHas('category', function ($categoryQuery) use ($query) {
+                             $categoryQuery->where('categoryName', 'like', "%$query%");
+                         });
+        })
+        ->paginate(4);
+
+    return response()->json($products);
+}
+
     
 
     public function tripIndex(){

@@ -1,4 +1,4 @@
-<footer class="bg-[#0a4275] font-[sans-serif]">
+<footer class="bg-[#0a4275] mt-16 font-[sans-serif]">
     <div class="py-12 px-6 sm:px-10">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         <div class="lg:col-span-2">

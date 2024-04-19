@@ -89,7 +89,6 @@
           <input type="hidden" name="price" value="PRICE TOTAL FOR PAY: " class="text-5xlxl">
           <input type="hidden" name="total" value="{{ $sumTotal }}">
           <input type="hidden" name="_token" value="{{csrf_token()}}">
-          <input type="hidden" name="quantity[]" value="{{$product->pivot->quantite}}">
           <h3 class="text-xl font-extrabold text-[#333] border-b pb-4">Order Summary</h3>
           <ul class="text-[#333] divide-y mt-6">
               <li class="flex flex-wrap gap-4 text-md py-4">Tax <span
