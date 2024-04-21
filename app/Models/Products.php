@@ -20,4 +20,8 @@ class Products extends Model
         return $this->belongsTo(Categories::class, 'id_Category');
     }
 
+    public function favoris(){
+        return $this->belongsToMany(Products::class, 'favoris', 'client_id','product_id');
+    }
+
 }

@@ -4,6 +4,12 @@
 @endsection
 @section('main')
 
+    <style>
+    .favorite-icon-red {
+    fill: red;  
+    }
+
+    </style>
     <!-- ====== Hero Section Start -->
     <div class="relative mt-4 bg-white pb-[110px] pt-[120px] dark:bg-dark lg:pt-[70px]">
         <div class="container mx-auto">
@@ -83,7 +89,7 @@
             class="mb-4 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">
             ABOUT <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">US</mark></h1>
         <div class="container mt-16 mx-auto">
-            <div class="-mx-4 flex flex-wrap items-center justify-between">
+            <div class=" flex flex-wrap items-center justify-between">
                 <div class="w-full px-4 lg:w-6/12">
                     <div class="-mx-3 flex items-center sm:-mx-4">
                         <div class="w-full px-3 sm:px-4 xl:w-1/2">
@@ -308,9 +314,7 @@
                             class="mt-6 ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                     </div>
                 </div>
-            </form>
-
-
+        </form>
             {{-- <div>
               <form class="flex gap-2" action="{{ route('Client.fetch') }}" method="GET">
                 @csrf
@@ -331,17 +335,49 @@
             <div class=" p-4 mx-auto lg:max-w-7xl sm:max-w-full">
                 <div class="Alll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($products as $product)
-                        <a href="{{ route('ProductDetails', ['ProductId' => $product->id]) }}">
-                            <div class="bg-blue-100 rounded-2xl p-6 hover:-translate-y-2 transition-all relative">
-                                <div
-                                    class="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18px"
-                                        class="fill-gray-800 inline-block" viewBox="0 0 64 64">
-                                        <path
-                                            d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z"
-                                            data-original="#000000"></path>
-                                    </svg>
+                    @if ($product->favoris_client_id === NULL )
+                    {{-- <a href="{{ route('ProductDetails', ['ProductId' => $product->id]) }}"> --}}
+                        <div class="bg-gray-200 rounded-2xl p-6 hover:-translate-y-2 transition-all relative" data-product-id="{{ $product->id }}">
+                            <form class="favorisForm" action="{{ route('Add.favoris', ['productId' => $product->id, 'clientId' => Auth::user()->id]) }}" method="POST">
+                                @csrf
+                                <div class="bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
+                                    <button type="submit" onclick="toggleFavorite(event, '{{ $product->id }}', '{{ Auth::user()->id }}')">
+                                        <svg id="heart" class="heart-icon" xmlns="http://www.w3.org/2000/svg" width="25px" fill="#bdbdbd" viewBox="0 0 512 512">
+                                            <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+                                        </svg>
+                                    </button>
                                 </div>
+                            </form>
+                            <div class="w-11/12 h-[220px] overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
+                                <img src="{{ asset($product->productImage) }}" alt="Product 1"
+                                    class="h-full w-full object-contain" />
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-gray-800">{{ $product->productName }} </h3>
+                                <p class="text-gray-500 text-sm mt-2">
+                                    {{ substr($product->productDescription, 0, 60) }}...</p>
+                                <div class="flex items-center justify-between ">
+                                    <div>
+                                        <h4 class="text-lg text-gray-700 font-bold mt-4">{{ $product->productPrice }}
+                                            DH</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{-- </a> --}}                        
+                    @else
+                         {{-- <a href="{{ route('ProductDetails', ['ProductId' => $product->id]) }}"> --}}
+                            <div class="bg-gray-200 rounded-2xl p-6 hover:-translate-y-2 transition-all relative" data-product-id="{{ $product->id }}">
+                                <form class="favorisForm" action="{{ route('Add.favoris', ['productId' => $product->id, 'clientId' => Auth::user()->id]) }}" method="POST">
+                                    @csrf
+                                    <div class="bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
+                                        <button type="submit" onclick="toggleFavorite(event, '{{ $product->id }}', '{{ Auth::user()->id }}')">
+                                            <svg id="heart" class="heart-icon" xmlns="http://www.w3.org/2000/svg" width="25px" fill="#ff0000" viewBox="0 0 512 512">
+                                                <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </form>
                                 <div class="w-11/12 h-[220px] overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
                                     <img src="{{ asset($product->productImage) }}" alt="Product 1"
                                         class="h-full w-full object-contain" />
@@ -358,7 +394,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        {{-- </a> --}}   
+                    @endif
+                   
                     @endforeach
                 </div>
                 <div class="w-11/12 mx-auto my-8">{{ $products->links() }}</div>
@@ -404,7 +442,43 @@
 @endsection
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
+    <script>    
+        function toggleFavorite(event, productId, userId) {
+        event.preventDefault();
+    
+        var xhr = new XMLHttpRequest();
+    
+        var url = `/Client/AddToFavoris/${productId}/${userId}`;
+    
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+    
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var heart = event.target.closest('.heart-icon');
+                if (heart) {
+                    heart.classList.toggle('favorite-icon-red');
+                }
+                console.log('Product successfully added to favorites');
+            } else {
+                console.error('Error adding product to favorites');
+            }
+        };
+    
+        xhr.onerror = function() {
+            console.error('Erreur lors de la requête AJAX');
+        };
+    
+        xhr.send(JSON.stringify({
+            productId: productId,
+            userId: userId
+        }));
+    }
+        
+
+
+
     $(document).ready(function() {
         $('#searchInput').on('input', function() {
             var query = $(this).val();
@@ -453,4 +527,11 @@
 
        
     });
+
+    
+
+
+    
+
+
 </script>

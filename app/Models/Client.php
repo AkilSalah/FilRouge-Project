@@ -23,4 +23,10 @@ class Client extends Model
     public function articles(){
         return $this->hasMany(Article::class,'client_id');
     }
+    
+    public function favoris(){
+        return $this->belongsToMany(Client::class, 'favoris', 'product_id', 'client_id');
+    }
+    
+    
 }

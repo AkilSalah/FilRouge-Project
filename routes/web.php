@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CommentaireController;
+use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\GuideController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProductsController;
@@ -63,7 +64,8 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::delete('/Guide/delete-reservation/{tripReservation}', [GuideController::class, 'deleteReservation'])->name('guide.delete');
     });
 
-    
+            Route::get('/search',[ClientController::class,'search'])->name('Client.fetch');
+
     // Routes pour les clients
     Route::middleware(['auth','role:Client'])->group(function () {
         Route::get('/client/panier', [PanierController::class, 'index'])->name('client.panier');
@@ -73,7 +75,6 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::post('Client/AddToCart/{productId}',[ClientController::class,'store'])->name('add_to_cart');
         Route::get('Client/Home',[ClientController::class,'index'])->name('Client');
         Route::get('Client/ProductDetails/{ProductId}',[ClientController::class,'create'])->name('ProductDetails');
-        Route::get('/search',[ClientController::class,'search'])->name('Client.fetch');
         Route::get('/filter', [ArticleController::class, 'filter'])->name('Client.filter');
         Route::delete('Client/Panier/{idProduct}' ,[PanierController::class , 'deleteFromPanier'])->name('deleteFromPanier');
         Route::post('/Client/AddArticle' ,[ArticleController::class,'store'])->name('storeArticle');
@@ -91,11 +92,9 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::post('/session', [StripeController::class,'session'])->name('session');
         Route::get('/success',  [StripeController::class,'success'] )->name('success');
 
-        // Route::get('/success', [stripeController::class, 'success'])->name('success');
-        // Route::post('/process-payment', [stripeController::class,'processPayment'])->name('process.payment');
-        // Route::get('/checkout', 'App\Http\Controllers\StripeController@checkout')->name('checkout');
-        // Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');
-
+        Route::get('/client/Favoris', [FavorisController::class, 'index'])->name('Client.favoris');
+        
+        Route::post('/Client/AddToFavoris/{productId}/{clientId}', [FavorisController::class, 'store'])->name('Add.favoris');
     });
 
 

@@ -18,13 +18,20 @@ class ClientController extends Controller
      */
     public function index()
     {
+        $userId = Auth::id();
+        $client = Client::where('id_User', $userId)->first();
+
         $themes = Theme::with('tag')->get();
         $categories = Categories::all();
-        $products = Products::query();
-        $products = $products->paginate(4);
 
+        $products = Products::leftJoin('favoris', 'products.id', '=', 'favoris.product_id')
+        ->select('products.*', 'favoris.client_id as favoris_client_id')
+        ->paginate(4);
+    
         return view('welcome',compact('products','categories','themes'));
     }
+
+
     public function search(Request $request)
 {
     $query = $request->input('search');

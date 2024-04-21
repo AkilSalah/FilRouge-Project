@@ -58,7 +58,7 @@ class StripeController extends Controller
             $commande->date = date('Y-m-d');
             $commande->save();
         
-        return view ('Checkout');
+        return view ('Success');
     }
  
     // public function success()
