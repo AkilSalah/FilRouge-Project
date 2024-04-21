@@ -1,6 +1,10 @@
 <header class='shadow-md py-1 px-4 sm:px-10 bg-white font-sans min-h-[70px]'>
     <div class='flex flex-wrap items-center justify-between gap-4'>
-      <a href="javascript:void(0)"><img src="{{ asset('/images/pêcheLogo.jpg') }}" alt="logo" class='w-20' /></a>
+      @if (Auth()->check())
+      <a href="{{ route('Client') }}"><img src="{{ asset('/images/pêcheLogo.jpg') }}" alt="logo" class='w-20' /></a>          
+      @else
+      <a href="{{ route('welcome') }}"><img src="{{ asset('/images/pêcheLogo.jpg') }}" alt="logo" class='w-20' /></a>          
+      @endif
       <div class='flex items-center max-sm:ml-auto lg:order-1'>
         @php
         use Illuminate\Support\Facades\Auth;

@@ -304,7 +304,7 @@
     <section class="overflow-hidden bg-white pb-12 pt-10 dark:bg-dark lg:pb-[90px] lg:pt-[90px]">
         <h1
             class="mb-4 ml-7 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">
-            OUR <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">SERVECES</mark></h1>
+            OUR <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">SERVICES</mark></h1>
         <div class=" flex justify-around flex-wrap">
             <form id="searchForm" action="{{ route('Client.fetch') }}" method="GET">
                 @csrf
@@ -315,29 +315,18 @@
                     </div>
                 </div>
         </form>
-            {{-- <div>
-              <form class="flex gap-2" action="{{ route('Client.fetch') }}" method="GET">
-                @csrf
-                <select id="Categorie" name="Categorie" class="mt-6 ml-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option selected disabled>Sélectionnez une catégorie</option>
-                  <option value="Tout">Tout</option>
-                  @foreach ($categories as $categorie)
-                  <option value="{{$categorie->id}}">{{$categorie->categoryName}}</option>
-                  @endforeach
-                </select>
-                <div>
-                  <button type="submit" class="px-4 py-2 mt-7 text-sm font-medium text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">Filtrer</button>
-                </div>
-              </form>
-            </div> --}}
+          
         </div>
+        <x-session />
+
         <div class="font-[sans-serif] mt-10 ">
             <div class=" p-4 mx-auto lg:max-w-7xl sm:max-w-full">
                 <div class="Alll grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($products as $product)
                     @if ($product->favoris_client_id === NULL )
-                    {{-- <a href="{{ route('ProductDetails', ['ProductId' => $product->id]) }}"> --}}
+                    <a href="{{ route('ProductDetails', ['ProductId' => $product->id]) }}">
                         <div class="bg-gray-200 rounded-2xl p-6 hover:-translate-y-2 transition-all relative" data-product-id="{{ $product->id }}">
+                            @if (Auth::check())
                             <form class="favorisForm" action="{{ route('Add.favoris', ['productId' => $product->id, 'clientId' => Auth::user()->id]) }}" method="POST">
                                 @csrf
                                 <div class="bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
@@ -348,6 +337,7 @@
                                     </button>
                                 </div>
                             </form>
+                            @endif
                             <div class="w-11/12 h-[220px] overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
                                 <img src="{{ asset($product->productImage) }}" alt="Product 1"
                                     class="h-full w-full object-contain" />
@@ -363,11 +353,13 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-                    {{-- </a> --}}                        
+                    </a>                        
                     @else
-                         {{-- <a href="{{ route('ProductDetails', ['ProductId' => $product->id]) }}"> --}}
+                         <a href="{{ route('ProductDetails', ['ProductId' => $product->id]) }}">
                             <div class="bg-gray-200 rounded-2xl p-6 hover:-translate-y-2 transition-all relative" data-product-id="{{ $product->id }}">
+                                @if (Auth::check())
                                 <form class="favorisForm" action="{{ route('Add.favoris', ['productId' => $product->id, 'clientId' => Auth::user()->id]) }}" method="POST">
                                     @csrf
                                     <div class="bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
@@ -378,6 +370,7 @@
                                         </button>
                                     </div>
                                 </form>
+                                @endif
                                 <div class="w-11/12 h-[220px] overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
                                     <img src="{{ asset($product->productImage) }}" alt="Product 1"
                                         class="h-full w-full object-contain" />
@@ -394,7 +387,7 @@
                                     </div>
                                 </div>
                             </div>
-                        {{-- </a> --}}   
+                        </a>   
                     @endif
                    
                     @endforeach

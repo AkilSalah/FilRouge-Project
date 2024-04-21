@@ -17,12 +17,9 @@ class FavorisController extends Controller
      * Display a listing of the resource.
      */
     public function index(){
-        
-        $this->favorisRepository->index();
-    }
-
-
-
+        return $this->favorisRepository->index();
+   }
+  
     /**
      * Show the form for creating a new resource.
      */
@@ -36,6 +33,7 @@ class FavorisController extends Controller
      */
     public function store($productId, $clientId)
     {
+        
         $this->favorisRepository->store($clientId, $productId);
         return redirect()->back()->with('success', 'Successfully stored product in favorites');
         

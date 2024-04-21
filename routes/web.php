@@ -93,7 +93,7 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::get('/success',  [StripeController::class,'success'] )->name('success');
 
         Route::get('/client/Favoris', [FavorisController::class, 'index'])->name('Client.favoris');
-        
+        Route::delete('/Client/DeleteFavoris/{favoris}', [FavorisController::class, 'destroy'])->name('destroy.favoris');
         Route::post('/Client/AddToFavoris/{productId}/{clientId}', [FavorisController::class, 'store'])->name('Add.favoris');
     });
 
