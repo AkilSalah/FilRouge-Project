@@ -400,7 +400,7 @@
 
     {{-- blog section  --}}
 
-    <div class="bg-white font-[sans-serif] my-4">
+    <div id="blog" class="bg-white font-[sans-serif] my-4">
         <div class="max-w-7xl mx-auto">
             <div class="text-center">
                 <h2

@@ -69,9 +69,10 @@ class CommentaireController extends Controller
      */
     public function update(commentsRequest $request, Commentaire $commentaire)
     {
-        if(auth()->user()->id !== $commentaire->article->client->id_User) {
+        if(auth()->user()->id !== $commentaire->article->client->user->id) {
             abort(403, 'Unauthorized action.');
         }
+        
         $validateData = $request->validated();
         $commentaire->update([
             'commentaire' => $validateData['comment'],
@@ -85,9 +86,7 @@ class CommentaireController extends Controller
      */
     public function destroy(Commentaire $commentaire)
     {
-        if(auth()->user()->id !== $commentaire->article->client->id_User) {
-            abort(403, 'Unauthorized action.');
-        }
+        
         $commentaire->delete();
         return redirect()->back()->with('success', 'Comment deleted successfully!');
     }

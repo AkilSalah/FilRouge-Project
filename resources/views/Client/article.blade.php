@@ -116,12 +116,15 @@
 
         <div class=" Alll grid mt-10 gap-6 lg:grid-cols-3">
                 @foreach ($articles as $article)
+                {{-- @dd($article->client->user->id); --}}
                 <div class="bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] relative top-0 hover:-top-2 transition-all duration-300">
+                    @if ($article->client->id_User === Auth::id())
                     <div id="dropdownMenuIconHorizontalButton_{{ $article->id }}" data-dropdown-toggle="dropdownDotsHorizontal_{{ $article->id }}" class=" bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
                             <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
                         </svg>
                     </div>
+                    @endif
                 <div id="dropdownDotsHorizontal_{{ $article->id }}" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                 <ul class="py-2" aria-labelledby="dropdownMenuIconHorizontalButton_{{ $article->id }}">
                 <li>

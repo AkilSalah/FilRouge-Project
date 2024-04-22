@@ -79,7 +79,7 @@
         <li class='max-lg:border-b max-lg:py-2 px-3'><a href='{{ route('client.trip') }}'
             class='hover:text-[#007bff] text-gray-600 font-bold block text-[15px]'>Trips</a>
         </li>
-        <li class='max-lg:border-b max-lg:py-2 px-3'><a href='javascript:void(0)'
+        <li class='max-lg:border-b max-lg:py-2 px-3'><a href='{{ route('welcome') }}/#blog'
             class='hover:text-[#007bff] text-gray-600 font-bold block text-[15px]'>Blog</a>
         </li>
         <li class='max-lg:border-b max-lg:py-2 px-3'><a href='{{ route('Client.favoris') }}'
