@@ -13,6 +13,8 @@ Mes voyages
             <span data-modal-target="crud-modal" data-modal-toggle="crud-modal"  class="text">Ajouter un Voyage</span>
         </a>
     </div>
+    <x-session />
+
     <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(90%-1rem)] mt-16 max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">
             <!-- Modal content -->

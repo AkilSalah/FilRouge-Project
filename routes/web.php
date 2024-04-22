@@ -92,9 +92,16 @@ Route::get('/', [ClientController::class, 'index'])->name('welcome');
         Route::post('/session', [StripeController::class,'session'])->name('session');
         Route::get('/success',  [StripeController::class,'success'] )->name('success');
 
+
         Route::get('/client/Favoris', [FavorisController::class, 'index'])->name('Client.favoris');
         Route::delete('/Client/DeleteFavoris/{favoris}', [FavorisController::class, 'destroy'])->name('destroy.favoris');
-        Route::post('/Client/AddToFavoris/{productId}/{clientId}', [FavorisController::class, 'store'])->name('Add.favoris');
+        Route::post('/Client/AddToFavoris/{clientId}/{productId}', [FavorisController::class, 'store'])->name('Add.favoris');
+        Route::delete('/Client/DeleteFavoris/{clientId}/{productId}', [FavorisController::class,'destroy'])->name('Delete.favoris');
+        
+        Route::post('/Client/toggleFavorit/{clientId}/{productId}', [FavorisController::class,'toggleFavorit'])->name('toggleFavorit');
+        
+
+
     });
 
 

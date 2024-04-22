@@ -27,8 +27,9 @@ class ClientController extends Controller
         $products = Products::leftJoin('favoris', 'products.id', '=', 'favoris.product_id')
         ->select('products.*', 'favoris.client_id as favoris_client_id')
         ->paginate(4);
+
     
-        return view('welcome',compact('products','categories','themes'));
+        return view('welcome',compact('products','categories','themes','client'));
     }
 
 

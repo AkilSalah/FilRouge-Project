@@ -9,6 +9,8 @@ Reservation management
             <h1>Users Reservation</h1>
         </div>
     </div>
+    <x-session />
+
 {{-- @dd($tripReserves) --}}
 
     <div class="table-data">

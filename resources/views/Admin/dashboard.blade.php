@@ -9,6 +9,8 @@ Dashboard
             <h1>Dashboard</h1>
         </div>
     </div>
+    <x-session />
+
 
     <ul class="box-info">
         <li>

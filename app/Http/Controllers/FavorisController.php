@@ -28,15 +28,14 @@ class FavorisController extends Controller
         //
     }
 
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store($productId, $clientId)
     {
-        
-        $this->favorisRepository->store($clientId, $productId);
-        return redirect()->back()->with('success', 'Successfully stored product in favorites');
-        
+        $this->favorisRepository->store($productId,$clientId);
+        return redirect()->back()->with('success', 'Successfully stored product in favorites');   
     }
 
     /**
@@ -66,9 +65,5 @@ class FavorisController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Favoris $favoris)
-    {
-        $this->favorisRepository->destroy($favoris);
-        return redirect()->back()->with('success', 'Successfully removed product from favorites');
-    }
+   
 }

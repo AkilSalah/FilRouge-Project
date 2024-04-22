@@ -9,6 +9,8 @@ Approved
         <h1>Last trip</h1>
     </div>
 </div>      
+<x-session />
+
 {{-- @dd($trips); --}}
 <div class="grid grid-cols-1 md:grid-cols-1 gap-8 mt-10">
     @foreach ($trips as $trip)
