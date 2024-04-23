@@ -23,7 +23,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'image' => 'required',
+            'image' => 'image',
             'description' => 'required',
             'tags' => 'required|array',
         ];

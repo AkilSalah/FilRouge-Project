@@ -13,7 +13,24 @@ Mes voyages
             <span data-modal-target="crud-modal" data-modal-toggle="crud-modal"  class="text">Ajouter un Voyage</span>
         </a>
     </div>
-    <x-session />
+    @error('date')
+    <div
+    class="flex bg-white dark:bg-gray-900 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500">
+    <svg viewBox="0 0 24 24" class="w-8 h-8 text-red-500 stroke-current" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M12 8V12V8ZM12 16H12.01H12ZM21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <div class="ml-3">
+        <div class="font-bold text-left text-black dark:text-gray-50">{{ $message }}</div>
+    </div>
+    </div> 
+  @enderror
+
+    <div class="mt-1 mb-6">
+      <x-session />
+    </div>
 
     <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(90%-1rem)] mt-16 max-h-full">
         <div class="relative p-4 w-full max-w-md max-h-full">

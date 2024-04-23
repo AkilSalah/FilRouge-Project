@@ -91,7 +91,7 @@
                 <div
                     class="flex max-lg:flex-col bg-white cursor-pointer rounded overflow-hidden shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] hover:scale-105 transition-all duration-300">
                     <img src="{{ asset($theme->image) }}" alt="Blog Post 1"
-                        class="lg:w-2/5 min-h-[250px] h-60  " />
+                        class="lg:w-2/5 min-h-[310px] h-60  " />
                     <div class="p-6 lg:w-3/5">
                         <h3 class="text-xl font-bold text-[#333]"> {{ $theme->title }} </h3>
                         <span class="text-sm block text-gray-400 mt-2">{{ $theme->created_at->format('d-M-Y') }}</span>
@@ -158,12 +158,14 @@
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                             placeholder="Thème name" required="">
                                     </div>
-                                    <div class="col-span-2  ">
-                                        <label for="image"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-                                        <input type="file" name="image" id="image" 
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                            placeholder="Thème image" required="">
+                                    <div class="col-span-2">
+                                        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
+                                        @if($theme->image)
+                                            <img src="{{ asset($theme->image) }}" alt="theme Image" class="mb-2 max-w-full h-auto">
+                                        @else
+                                            <p class="text-gray-500">Aucune image disponible</p>
+                                        @endif
+                                        <input type="file" name="image" id="image" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Thème image">
                                     </div>
                                     <div class="col-span-2">
                                         <label for="name" 

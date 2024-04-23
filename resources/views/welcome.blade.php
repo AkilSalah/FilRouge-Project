@@ -315,7 +315,6 @@
                     </div>
                 </div>
         </form>
-          
         </div>
         <x-session />
 
@@ -468,10 +467,8 @@
             userId: userId
         }));
     }
+    
         
-
-
-
     $(document).ready(function() {
         $('#searchInput').on('input', function() {
             var query = $(this).val();
@@ -483,9 +480,11 @@
                     search: query
                 },
                 success: function(response) {
+                    console.log(response);
                     $('.Alll').empty(); 
                     response.data.forEach(product => {
-                        const html = `
+                        const html =document.createElement ("div");
+                        html.innerHTML = `
                             <a href="/Client/ProductDetails/${product.id}">
                                 <div class="bg-blue-100 rounded-2xl p-6 hover:-translate-y-2 transition-all relative">
                                     <div class="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
@@ -507,7 +506,6 @@
                                     </div>
                                 </div>
                             </a>`;
-                    
                         $('.Alll').append(html);
                     });
                 },

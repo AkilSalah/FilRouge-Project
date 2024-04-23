@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categories;
 use App\Models\Guide;
 use App\Models\Voyage;
+use App\Rules\AfterCurrentDate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -36,31 +37,36 @@ class VoyageController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $guide = Auth::user()->id;
-        $idGuide = Guide::where('id_User', $guide)->first();
-        $request->validate([
-            'title'=>'required',
-            'description' =>'required',
-            'date' => 'required',
-            'nbPlaces' =>'required',
-            'lieu' =>'required',
-            'image' =>'required',
-        ]);
-        $imagePath = $request->file('image')->store('public/images/voyages');
-        $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
+    $currentDate = now()->toDateString();
 
-        Voyage::create([
-            'guide_id' => $idGuide->id,
-            'image' => $relativeImagePath,
-            'title' => $request->title,
-            'description' => $request->description,
-            'nbPlaces' => $request->nbPlaces,
-            'date' => $request->date,
-            'lieu' => $request->lieu,
-        ]);
-        return redirect()->back()->with('success', 'Voyage mis à jour avec succès.');
-    }
+    $guide = Auth::user()->id;
+    $idGuide = Guide::where('id_User', $guide)->first();
+    
+    $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'date' => ['required', new AfterCurrentDate],
+        'nbPlaces' => 'required',
+        'lieu' => 'required',
+        'image' => 'required|image', 
+    ]);
+
+    $imagePath = $request->file('image')->store('public/images/voyages');
+    $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
+
+    $voyage = Voyage::create([
+        'guide_id' => $idGuide->id,
+        'image' => $relativeImagePath,
+        'title' => $request->title,
+        'description' => $request->description,
+        'nbPlaces' => $request->nbPlaces,
+        'date' => $request->date,
+        'lieu' => $request->lieu,
+    ]);
+    return redirect()->back()->with('success', 'The voyage has been created successfully.');
+
+}
+
 
     /**
      * Display the specified resource.

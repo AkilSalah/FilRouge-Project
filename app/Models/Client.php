@@ -27,6 +27,9 @@ class Client extends Model
     public function favoris(){
         return $this->belongsToMany(Client::class, 'favoris', 'product_id', 'client_id');
     }
+    public function comments(){
+        return $this->hasMany(Commentaire::class, 'client_id');
+    }
     
     
 }

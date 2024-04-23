@@ -14,14 +14,12 @@ class CommentaireController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($articleId)
-    {
+    public function index($articleId){
     $article = Article::with('client.user','theme')->find($articleId);
-
     if (!$article) {
         abort(404);
     }
-    $comments = Commentaire::with('article.client.user')->where('article_id', $articleId)->get();    
+    $comments = Commentaire::with('article','client')->where('article_id', $articleId)->get();    
     return view('Client.articleDetails', compact('article', 'comments'));
     }
 
@@ -38,12 +36,14 @@ class CommentaireController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(commentsRequest $request , $articleId)
-    {
+    { 
+        $client = Client::where('id_User', Auth::id())->first();
         $article = Article::findOrFail($articleId);
         $validateData = $request->validated();
          Commentaire::create([
             'commentaire' => $validateData['comment'],
             'article_id' => $article->id,
+            'client_id' => $client->id,
         ]);
         return redirect()->back()->with('success', 'Comment added successfully!');
     }
@@ -72,7 +72,7 @@ class CommentaireController extends Controller
         if(auth()->user()->id !== $commentaire->article->client->user->id) {
             abort(403, 'Unauthorized action.');
         }
-        
+
         $validateData = $request->validated();
         $commentaire->update([
             'commentaire' => $validateData['comment'],

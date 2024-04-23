@@ -6,8 +6,7 @@
 @endif --}}
 
 @if (session('success'))
-
-    <div
+  <div
         class="flex bg-white dark:bg-gray-900 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-500 stroke-current" fill="none"
             viewBox="0 0 24 24">
@@ -16,10 +15,9 @@
         <div class="ml-3">
             <div class="font-bold text-left text-black dark:text-gray-50">{{ session('success') }}</div>
         </div>
-    </div>
-    @endif
-    @if (session('error'))
-
+    </div>   
+@endif
+@if (session('error'))
     <div
         class="flex bg-white dark:bg-gray-900 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500">
         <svg viewBox="0 0 24 24" class="w-8 h-8 text-red-500 stroke-current" fill="none"
@@ -31,6 +29,10 @@
         <div class="ml-3">
             <div class="font-bold text-left text-black dark:text-gray-50">{{ session('error') }}</div>
         </div>
-    </div>
-    @endif
+    </div> 
+@endif
+
+
+
+
 

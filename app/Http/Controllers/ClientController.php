@@ -38,7 +38,8 @@ class ClientController extends Controller
     $query = $request->input('search');
     
     if (empty($query)) {
-        return response()->json(['error' => 'Search query is empty'], 400);
+        $products=Products::paginate(4);
+        return response()->json($products);
     }
     
     $products = Products::with('category')

@@ -81,7 +81,7 @@ class ThemeController extends Controller
 {
     $request->validate([
         'title' => 'required',
-        'image' => 'required',
+        'image' => 'image',
         'description' =>'required',
         'tags' => 'required|array',
     ]);

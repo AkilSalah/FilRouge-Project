@@ -107,39 +107,33 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-        public function update(ArticleRequest $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
-        $user = Auth::user()->id;
-
-        if ($user !== $article->client->id_User) {
-            abort(403, 'Unauthorized action.');
+    $validatedData = $request->validated();
+    $tagIds = $request->input('tags');
+    if ($request->hasFile('image')) {
+        if ($article->image && Storage::exists($article->image)) {
+            Storage::delete($article->image);
         }
 
-        $validatedData = $request->validated();
-        $tagIds = $request->input('tags');
-
-        if ($request->hasFile('image')) {
-            if ($article->image && Storage::exists($article->image)) {
-                Storage::delete($article->image);
-            }
-
-            $imagePath = $request->file('image')->store('public/images/articles');
-            $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
-
-            $article->update([
-                'image' => $relativeImagePath,
-            ]);
-        }
+        $imagePath = $request->file('image')->store('public/images/articles');
+        $relativeImagePath = str_replace('public/', 'storage/', $imagePath);
 
         $article->update([
-            'title' => $validatedData['name'],
-            'description' => $validatedData['description'],
-            'articleTags' =>json_encode($tagIds)
+            'image' => $relativeImagePath,
         ]);
-
-        return redirect()->back()->with('success', 'The article has been updated successfully.');
     }
 
+    $article->update([
+        'title' => $validatedData['name'],
+        'description' => $validatedData['description'],
+        'articleTags' => json_encode($tagIds)
+    ]);
+
+    return redirect()->back()->with('success', 'L\'article a été mis à jour avec succès.');
+}
+
+    
 
     /**
      * Remove the specified resource from storage.

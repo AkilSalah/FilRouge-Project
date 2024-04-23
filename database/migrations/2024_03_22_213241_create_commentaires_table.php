@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('commentaire');
             $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
+            $table->foreignId('client_id')->constrained('clients')->onDelete('cascade');
             $table->timestamps();
         });
     }
