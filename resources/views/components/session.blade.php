@@ -1,22 +1,3 @@
-{{-- @if (session('success'))
-    <div class="bg-green-200 text-green-700 mt-4 p-3 mb-3 rounded-md">{{ session('success') }}</div>
-@endif
-@if (session('error'))
-    <div class="bg-red-200 text-red-700 p-3 mb-3 mt-4 rounded-md">{{ session('error') }}</div>
-@endif --}}
-
-@if (session('success'))
-  <div
-        class="flex bg-white dark:bg-gray-900 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-500 stroke-current" fill="none"
-            viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-        </svg>
-        <div class="ml-3">
-            <div class="font-bold text-left text-black dark:text-gray-50">{{ session('success') }}</div>
-        </div>
-    </div>   
-@endif
 @if (session('error'))
     <div
         class="flex bg-white dark:bg-gray-900 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-red-500">
@@ -30,6 +11,18 @@
             <div class="font-bold text-left text-black dark:text-gray-50">{{ session('error') }}</div>
         </div>
     </div> 
+@endif
+@if (session('success'))
+  <div
+        class="flex bg-white dark:bg-gray-900 items-center px-6 py-4 text-sm border-t-2 rounded-b shadow-sm border-green-500">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-green-500 stroke-current" fill="none"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+        <div class="ml-3">
+            <div class="font-bold text-left text-black dark:text-gray-50">{{ session('success') }}</div>
+        </div>
+    </div>   
 @endif
 
 

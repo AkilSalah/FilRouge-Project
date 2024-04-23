@@ -29,16 +29,12 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        // dd($request->all());
-        $validate = $request->validate([
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
     
-        $credentials = [
-            'email' => $validate['email'],
-            'password' => $validate['password']
-        ];
+        $credentials = $request->only('email', 'password');
     
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
@@ -48,11 +44,14 @@ class LoginController extends Controller
                 return redirect()->route('Guide.dashboard');
             } elseif ($user->role === 'Client' && $user->status === 'Unblocked') {
                 return redirect()->route('Client');
+            } else {
+                return redirect()->route('login.create')->with('error', 'Erreur lors de la connexion.');
             }
-            return redirect()->route('login.create')->with('error', 'Erreur lors de la connexion .');
+        } else {
+            return redirect()->route('login.create')->with('error', 'Adresse e-mail ou mot de passe incorrect.');
         }
-    
     }
+    
     
 
     public function logout(){

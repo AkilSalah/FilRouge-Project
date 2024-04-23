@@ -13,7 +13,7 @@ Catégories
             <span data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text">Ajouter un Catégorie</span>
         </a>
     </div>
-    
+
     <x-session />
 
     <div id="crud-modal" tabindex="-1" aria-hidden="true"
