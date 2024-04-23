@@ -66,7 +66,7 @@
                     </label>
                   </div>
                   <div>
-                    <a href="jajvascript:void(0);" class="text-blue-600 font-semibold text-sm hover:underline">
+                    <a href="{{ route('forgetPassword') }}" class="text-blue-600 font-semibold text-sm hover:underline">
                       Forgot Password?
                     </a>
                   </div>

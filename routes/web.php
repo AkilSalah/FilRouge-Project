@@ -1,8 +1,10 @@
 <?php
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\resetPasswordController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\CommentaireController;
@@ -27,6 +29,11 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/', [ClientController::class, 'index'])->name('welcome');
 
+
+Route::get('/reset_Password/{token}',[ForgotPasswordController::class,'resetPassword'])->name('reset_password');
+route::get('/forgetPassword',[ForgotPasswordController::class, 'forgetPassword'])->name('forgetPassword');
+route::post('/forgetPassword',[ForgotPasswordController::class, 'forgetPasswordPost'])->name('forgetPasswordPost');
+route::post('/reset_Password',[ForgotPasswordController::class, 'resetPasswordPost'])->name('resetPasswordPost');
 
 
     // Routes pour les administrateurs
