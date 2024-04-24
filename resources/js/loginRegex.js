@@ -11,7 +11,7 @@ const validateInput = function(inputElement, regex, errorMessage, messageElement
     let small = document.getElementById(messageElementId);
 
     if (regex.test(inputElement.value)) {
-        small.innerHTML = "<b>Validé</b>";
+        small.innerHTML = "<b>This is a success </b>";
         small.classList.remove("text-red-500");
         small.classList.add("text-green-500");
     } else {
