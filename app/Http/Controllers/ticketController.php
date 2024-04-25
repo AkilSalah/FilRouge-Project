@@ -18,6 +18,7 @@ class ticketController extends Controller
         $notificationTicket = Reservation::with('client.user', 'voyage.guide.user')
         ->where('Client_id', $clientId->id)
         ->where('status', 1)
+        ->where('voyage->date','>', now())
         ->orderByDesc('id')
         ->get();
         return view('Client.ticketNot',compact('notificationTicket'));

@@ -50,7 +50,7 @@ class ReservationController extends Controller
             ]);
             $trip->nbPlaces -= 1;
             $trip->save();
-            return redirect()->back()->with('message', 'Reservation added successfully');
+            return redirect()->back()->with('success', 'Reservation added successfully');
         }else{
             return redirect()->back()->with('error', 'Unable to create reservation. Check availability.');
         }

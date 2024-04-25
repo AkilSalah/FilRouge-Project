@@ -18,20 +18,19 @@
                     <div class="hero-content">
                         <h1
                             class="mb-5 text-4xl font-bold  !leading-[1.208] text-dark dark:text-white sm:text-[42px] lg:text-[40px] xl:text-5xl">
-                            The Greatest <br />
-                            Journey Of Online <br />
-                            Payment.
+                            Your Fishing <br />
+                            Adventure Begins<br />
+                            Here
                         </h1>
                         <p class="mb-8 max-w-[480px] text-base text-body-color dark:text-dark-6">
-                            With TailGrids, business and students thrive together. Business
-                            can perfectly match their staffing to changing demand throughout
-                            the dayed.
+                            Découvrez le meilleur équipement de pêche avec notre sélection de produits de qualité supérieure, trouvez tout ce dont vous avez besoin pour vivre des aventures inoubliables au bord de l'eau.
+
                         </p>
                         <ul class="flex flex-wrap items-center">
                             <li>
-                                <a href="javascript:void(0)"
+                                <a href="#about"
                                     class="inline-flex items-center justify-center rounded-md bg-blue-600 px-6 py-3 text-center text-base font-medium text-white hover:bg-blue-dark lg:px-7">
-                                    Get Started
+                                    View More
                                 </a>
                             </li>
                         </ul>
@@ -84,7 +83,7 @@
     <!-- ====== Hero Section End -->
     {{-- about section  --}}
 
-    <section class="overflow-hidden bg-white pb-12 pt-10 dark:bg-dark lg:pb-[90px] lg:pt-[90px]">
+    <section id="about" class="overflow-hidden bg-white pb-12 pt-10 dark:bg-dark lg:pb-[90px] lg:pt-[90px]">
         <h1
             class="mb-4 text-2xl font-bold text-center leading-none tracking-tight text-gray-900 md:text-3xl lg:text-5xl dark:text-white">
             ABOUT <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">US</mark></h1>
@@ -284,14 +283,12 @@
                             Make your customers happy by giving services.
                         </h2>
                         <p class="mb-5 text-base text-body-color dark:text-dark-6">
-                            It is a long established fact that a reader will be distracted
-                            by the readable content of a page when looking at its layout.
-                            The point of using Lorem Ipsum is that it has a more-or-less.
+                            Découvrez le meilleur équipement de pêche et explorez les eaux les plus poissonneuses avec notre sélection de produits de qualité supérieure. Que vous soyez un pêcheur débutant ou expérimenté, trouvez tout ce dont vous avez besoin pour vivre des aventures inoubliables au bord de l'eau.
+
                         </p>
                         <p class="mb-8 text-base text-body-color dark:text-dark-6">
-                            A domain name is one of the first steps to establishing your
-                            brand. Secure a consistent brand image with a domain name that
-                            matches your business.
+                            At <b>Rayss web site</b>, we're passionate about fishing, just like you. Here's what sets us apart.
+
                         </p>
 
                     </div>
@@ -486,7 +483,7 @@
                         const html =document.createElement ("div");
                         html.innerHTML = `
                             <a href="/Client/ProductDetails/${product.id}">
-                                <div class="bg-blue-100 rounded-2xl p-6 hover:-translate-y-2 transition-all relative">
+                                <div class="bg-gray-100 rounded-2xl p-6 hover:-translate-y-2 transition-all relative">
                                     <div class="bg-gray-100 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18px" class="fill-gray-800 inline-block" viewBox="0 0 64 64">
                                             <path d="M45.5 4A18.53 18.53 0 0 0 32 9.86 18.5 18.5 0 0 0 0 22.5C0 40.92 29.71 59 31 59.71a2 2 0 0 0 2.06 0C34.29 59 64 40.92 64 22.5A18.52 18.52 0 0 0 45.5 4ZM32 55.64C26.83 52.34 4 36.92 4 22.5a14.5 14.5 0 0 1 26.36-8.33 2 2 0 0 0 3.27 0A14.5 14.5 0 0 1 60 22.5c0 14.41-22.83 29.83-28 33.14Z" data-original="#000000"></path>

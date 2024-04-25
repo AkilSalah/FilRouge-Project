@@ -3,8 +3,8 @@
 Get your tickets
 @endsection
 @section('main')
-
 <div class="bg-gray-50 text-[#333] mt-6 mb-16 w-full rounded font-[sans-serif] overflow-hidden">
+   @if ($notificationTicket->isNotEmpty() )
     @foreach ($notificationTicket as $getTicket)
     <div class="grid md:grid-cols-2 border-red-800 lg:grid-cols-3 gap-5 items-center">
      <div class="lg:col-span-2 py-10 px-6">
@@ -24,7 +24,22 @@ Get your tickets
       <img src="{{ asset($getTicket->voyage->image) }}" class="w-full h-full object-cover shrink-0" />
     </div>   
     @endforeach
-      
-  </div>
+      </div> 
+  
+@else
+
+<div class=" border border-red-800 rounded-full bg-red-100 hover:bg-red-200 mt-16">
+  <p class="text-4xl text-center px-4 py-2">No reservations have been confirmed yet</p>
+</div>
+
+
+
+
+
+
+
+</h1>
+@endif
+
 
 @endsection

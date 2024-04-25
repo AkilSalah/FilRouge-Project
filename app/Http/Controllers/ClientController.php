@@ -38,7 +38,9 @@ class ClientController extends Controller
     $query = $request->input('search');
     
     if (empty($query)) {
-        $products=Products::paginate(4);
+        $products = Products::leftJoin('favoris', 'products.id', '=', 'favoris.product_id')
+        ->select('products.*', 'favoris.client_id as favoris_client_id')
+        ->paginate(4);
         return response()->json($products);
     }
     
@@ -58,9 +60,11 @@ class ClientController extends Controller
 
     public function tripIndex(){
         $trips = Voyage::with('guide.user')
-        ->where('is_published' ,1)
+        ->where('is_published', 1)
+        ->where('nbPlaces', '>', 0)
+        ->whereDate('date', '>', now())
         ->get();
-        return view('Client.trip',compact('trips'));
+        return view('Client.trip', compact('trips'));
     }
 
 
@@ -78,37 +82,39 @@ class ClientController extends Controller
      * Store a newly created resource in storage.
      */
   
-public function store(Request $request, $productId)
-{
-    if (Auth()->check()) {
-        $user = Auth::user()->id;
-        $client = Client::where('id_User', $user)->first();
-        Products::findOrFail($productId);
-
-        if (!$client->panier) {
-            $panier = Panier::create(['id_Client' => $client->id]);
-            $client->panier()->save($panier);
-        }
-
-        $clientPanier = $client->panier;
-
-        $quantity = $request->input('quantity');
-
-        $existingCartItem = $clientPanier->products()
-            ->where('produit_id', $productId)
-            ->first();
-        if ($existingCartItem) {
-            $existingCartItem->pivot->quantite+=$quantity;
-            $existingCartItem->pivot->save();
-        } else {
-            $clientPanier->products()->attach($productId, ['quantite' => $quantity]);
-        }
-
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
-    } else {
-        return redirect()->route('login.create')->with('error', 'You must be logged in to add products to cart.');
-    }
-}
+     public function store(Request $request, $productId)
+     {
+         if (Auth()->check()) {
+             $user = Auth::user()->id;
+             $client = Client::where('id_User', $user)->first();
+             $product = Products::findOrFail($productId);
+     
+             if (!$client->panier) {
+                 $panier = Panier::create(['id_Client' => $client->id]);
+                 $client->panier()->save($panier);
+                 $clientPanier = $panier;
+             } else {
+                 $clientPanier = $client->panier;
+             }
+     
+             $quantity = $request->input('quantity');
+             $existingCartItem = $clientPanier->products()
+                 ->where('produit_id', $productId)
+                 ->first();
+     
+             if ($existingCartItem) {
+                 $existingCartItem->pivot->quantite += $quantity;
+                 $existingCartItem->pivot->save();
+             } else {
+                 $clientPanier->products()->attach($productId, ['quantite' => $quantity]);
+             }
+     
+             return redirect()->back()->with('success', 'Product added to cart successfully!');
+         } else {
+             return redirect()->route('login.create')->with('error', 'You must be logged in to add products to cart.');
+         }
+     }
+     
 
 
     /**
