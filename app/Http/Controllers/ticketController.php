@@ -18,14 +18,17 @@ class ticketController extends Controller
         $notificationTicket = Reservation::with('client.user', 'voyage.guide.user')
         ->where('Client_id', $clientId->id)
         ->where('status', 1)
-        ->where('voyage->date','>', now())
+        ->whereHas('voyage', function($query) {
+        $query->where('date', '>', now());
+        })
         ->orderByDesc('id')
         ->get();
-        return view('Client.ticketNot',compact('notificationTicket'));
+        return view('Client.ticketNot', compact('notificationTicket'));
     }
     
-    public function pdf()
-{
+    
+    public function pdf($id)
+    {
     $user = Auth::user();
     if ($user) {
         $clientId = Client::where('id_User', $user->id)->first(); 
@@ -33,9 +36,9 @@ class ticketController extends Controller
             $data = Reservation::with('client.user', 'voyage.guide.user')
                 ->where('Client_id', $clientId->id)
                 ->where('status', 1)
+                ->where('id', $id) 
                 ->orderByDesc('id')
                 ->get();
-                
             $pdf = PDF::loadView('pdf', compact('data'));
  
             return $pdf->stream('akil.pdf');

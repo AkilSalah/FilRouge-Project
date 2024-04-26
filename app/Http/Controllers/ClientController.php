@@ -34,7 +34,7 @@ class ClientController extends Controller
 
 
     public function search(Request $request)
-{
+    {
     $query = $request->input('search');
     
     if (empty($query)) {
@@ -43,21 +43,19 @@ class ClientController extends Controller
         ->paginate(4);
         return response()->json($products);
     }
-    
-    $products = Products::with('category')
+    $products = Products::leftJoin('favoris', 'products.id', '=', 'favoris.product_id')
+    ->select('products.*', 'favoris.client_id as favoris_client_id')
+    ->with('category')
         ->where(function ($queryBuilder) use ($query) {
             $queryBuilder->where('productName', 'like', "%$query%")
                          ->orWhereHas('category', function ($categoryQuery) use ($query) {
                              $categoryQuery->where('categoryName', 'like', "%$query%");
-                         });
+             });
         })
         ->paginate(4);
 
     return response()->json($products);
 }
-
-    
-
     public function tripIndex(){
         $trips = Voyage::with('guide.user')
         ->where('is_published', 1)

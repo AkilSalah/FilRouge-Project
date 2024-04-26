@@ -94,7 +94,7 @@ route::post('/reset_Password',[ForgotPasswordController::class, 'resetPasswordPo
         Route::get('/Client/Article/theme={themeId}', [ArticleController::class, 'index'])->name('articles');
 
         Route::get('/client/GetTicket', [ticketController::class, 'index'])->name('Client.getTicket');
-        Route::get('/client/pdf', [ticketController::class, 'pdf'])->name('pdf');
+        Route::get('/client/pdf/{id}', [ticketController::class, 'pdf'])->name('pdf');
 
         Route::post('/session', [StripeController::class,'session'])->name('session');
         Route::get('/success',  [StripeController::class,'success'] )->name('success');
