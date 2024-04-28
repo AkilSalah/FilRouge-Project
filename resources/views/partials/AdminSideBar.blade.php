@@ -58,11 +58,7 @@
 					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
 				</div>
 			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a>
+			
 			<a href="#" class="profile">
 				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfvHO_syH98KMSt6TBf28IV37Mv21b2fJ68PHaVsDpiA&s">
 			</a>

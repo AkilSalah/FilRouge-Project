@@ -67,7 +67,13 @@
         <a href="{{ route('login') }}"  class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Login
         </a>
-          
+         <button id="toggle" class="lg:hidden ml-7 outline-none">
+          <svg class="w-7 h-7" fill="#000" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </button> 
         @endif
 
         
@@ -91,3 +97,17 @@
       </ul>
     </div>
   </header>
+  <script>
+  var toggleBtn = document.getElementById('toggle');
+	var collapseMenu = document.getElementById('collapseMenu');
+
+	function handleClick() {
+	  if (collapseMenu.style.display === 'block') {
+		collapseMenu.style.display = 'none';    
+	  } else {
+		collapseMenu.style.display = 'block';    
+	  }    
+	}    
+
+	toggleBtn.addEventListener('click', handleClick);
+  </script>

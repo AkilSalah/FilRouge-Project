@@ -35,7 +35,6 @@ class FavorisController extends Controller
     public function store($productId, $clientId)
     {
         $this->favorisRepository->store($productId,$clientId);
-        return redirect()->back()->with('success', 'Successfully stored product in favorites');   
     }
 
     /**
