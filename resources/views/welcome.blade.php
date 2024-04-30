@@ -323,13 +323,14 @@
                         @foreach ($products as $product)
                             <div>
                                 <a href="{{ route('ProductDetails', ['ProductId' => $product->id]) }}">
-                                    @if (Auth::check())
                                         @if ($product->favoris_client_id === NULL)
                                             <div class="bg-gray-200 rounded-2xl p-6 hover:-translate-y-2 transition-all relative" data-product-id="{{ $product->id }}">
                                         @else
                                             <div class="bg-gray-200 rounded-2xl p-6 hover:-translate-y-2 transition-all relative" data-product-id="{{ $product->id }}" style="
                                                 fill: red; ">
                                         @endif
+                                        @if (Auth::check())
+
                                                 <form class="favorisForm" action="{{ route('Add.favoris', ['productId' => $product->id, 'clientId' => $client->id]) }}" method="POST">
                                                     @csrf
                                                     <div class="bg-gray-200 w-10 h-10 flex items-center justify-center rounded-full cursor-pointer absolute top-4 right-4">
@@ -340,6 +341,7 @@
                                                         </button>
                                                     </div>
                                                 </form>
+                                                @endif
                                                 <div class="w-11/12 h-[220px] overflow-hidden mx-auto aspect-w-16 aspect-h-8 md:mb-2 mb-4">
                                                     <img src="{{ asset($product->productImage) }}" alt="Product 1" class="h-full w-full object-contain" />
                                                 </div>
@@ -354,7 +356,6 @@
                                                 </div>
                                             </div>
                                         </a>
-                                    @endif
                                 </div>
                         @endforeach
                         </div>
@@ -423,7 +424,7 @@
             var heart = event.target.closest('.heart-icon');
 
             if (heart) {
-                heart.classList.toggle('favorite-icon-red'); // Ajoutez ou supprimez la classe pour changer la couleur du cœur
+                heart.classList.toggle('favorite-icon-red'); 
             }
 
         } else {
