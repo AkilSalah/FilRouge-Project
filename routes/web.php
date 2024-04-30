@@ -22,7 +22,7 @@ use App\Http\Middleware\RoleMiddleware;
 
 
 
-Route::get('/register', [RegisterController::class, 'create']);
+Route::get('/register', [RegisterController::class, 'create'])->name('register.create');
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 Route::get('/login', [LoginController::class, 'create'])->name('login.create');
 Route::post('/login', [LoginController::class, 'login'])->name('login');

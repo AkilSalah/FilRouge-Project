@@ -13,6 +13,7 @@
                 <span data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text">Ajouter un Thème</span>
             </a>
         </div>
+        
         <x-session />
 
 

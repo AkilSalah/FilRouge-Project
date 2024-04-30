@@ -13,6 +13,7 @@ Products
             <span data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text">Ajouter un Produit</span>
         </a>
     </div>
+    
     <x-session />
 
    

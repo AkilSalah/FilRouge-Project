@@ -37,7 +37,7 @@ class RegisterController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required',
+            'password' => ['required', 'regex:/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()_+]{8,20}$/'],
             'role' => 'required',
         ]);
     
@@ -57,8 +57,9 @@ class RegisterController extends Controller
                 return redirect()->route('Guide.dashboard');
             }
         }
-        return redirect()->route('login')->with('error', 'Erreur lors de la connexion.');
+        return redirect()->route('register')->with('error', 'Erreur lors de la connexion.');
     }
+    
     
     /**
      * Display the specified resource.

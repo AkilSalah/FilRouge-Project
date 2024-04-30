@@ -71,7 +71,7 @@ class ProductsController extends Controller
             'productImage' => $relativeImagePath,
             'productDescription' => $request->description
         ]);
-        return redirect()->back()->with('message', 'Product added successfully');
+        return redirect()->back()->with('success', 'Product added successfully');
 
 
     }

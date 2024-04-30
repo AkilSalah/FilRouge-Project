@@ -12,9 +12,9 @@
                     transform: scale(1.1);
                 }
             </style>
-            <div class=" flex justify-between">
+            <div class=" flex justify-between ">
                 <div>
-                    <h2 class="mb-12 text-center text-3xl font-bold">Latest articles</h2>
+                    <h2 class="mb-12  text-center text-3xl font-bold">Latest articles</h2>
                 </div>
                 <div>
                     <x-session />

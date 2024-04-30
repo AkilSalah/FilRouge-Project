@@ -54,7 +54,7 @@ class ThemeController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('message', 'Theme added successfully');
+        return redirect()->back()->with('success', 'Theme added successfully');
         
     }
 
@@ -129,6 +129,6 @@ class ThemeController extends Controller
     public function destroy(Theme $theme)
     {
         $theme->delete();
-        return redirect()->back()->with('message', 'Theme has been deleted successfully.');
+        return redirect()->back()->with('success', 'Theme has been deleted successfully.');
     }
 }

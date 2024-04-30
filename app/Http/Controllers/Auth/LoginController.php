@@ -30,8 +30,8 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'email' => ['required', 'email', 'regex:/^[^\s@]+@[^\s@]+\.[^\s@]+$/'],
+            'password' => ['required', 'regex:/^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d!@#$%^&*()_+]{8,20}$/'],
         ]);
     
         $credentials = $request->only('email', 'password');
@@ -51,6 +51,7 @@ class LoginController extends Controller
             return redirect()->route('login.create')->with('error', 'Adresse e-mail ou mot de passe incorrect.');
         }
     }
+    
     
     
 
