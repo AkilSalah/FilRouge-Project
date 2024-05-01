@@ -91,7 +91,7 @@
         <li class='max-lg:border-b max-lg:py-2 px-3'><a href='{{ route('Client.favoris') }}'
             class='hover:text-[#007bff] text-gray-600 font-bold block text-[15px]'>Favoris</a>
         </li>
-        <li class='max-lg:border-b max-lg:py-2 px-3'><a href='javascript:void(0)'
+        <li class='max-lg:border-b max-lg:py-2 px-3'><a href='{{ route('contact') }}'
             class='hover:text-[#007bff] text-gray-600 font-bold block text-[15px]'>Contact</a>
         </li>
       </ul>

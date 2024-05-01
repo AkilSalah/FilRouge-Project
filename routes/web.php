@@ -71,7 +71,9 @@ route::post('/reset_Password',[ForgotPasswordController::class, 'resetPasswordPo
         Route::delete('/Guide/delete-reservation/{tripReservation}', [GuideController::class, 'deleteReservation'])->name('guide.delete');
     });
 
-            Route::get('/search',[ClientController::class,'search'])->name('Client.fetch');
+    
+    
+    Route::get('/search',[ClientController::class,'search'])->name('Client.fetch');
 
     // Routes pour les clients
     Route::middleware(['auth','role:Client'])->group(function () {
@@ -111,4 +113,6 @@ route::post('/reset_Password',[ForgotPasswordController::class, 'resetPasswordPo
 
     });
 
-
+    Route::get('/Contact-Us', function(){
+            return view('Client.contact');
+        })->name('contact');

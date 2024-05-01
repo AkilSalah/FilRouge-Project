@@ -8,7 +8,7 @@ Catégories
         <div class="left">
             <h1>Catégories</h1>
         </div>
-        <a href="" class="btn-download">
+        <a href="#" class="btn-download">
             <span data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text">Ajouter un Catégorie</span>
         </a>
     </div>

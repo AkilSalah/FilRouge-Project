@@ -18,7 +18,7 @@
       href="/images/pêcheLogo.png"
       type="image/x-icon"
     />
-
+    
 </head>
 <body>
     @include('partials.ClientNavbar')

@@ -28,13 +28,13 @@ class ClientController extends Controller
         $join->on('products.id', '=', 'favoris.product_id')
              ->where('favoris.client_id', '=', $client->id);
         })
-        ->select('products.*', 'favoris.client_id as favoris_client_id')
+        ->select('products.*', 'favoris.client_id as favoris_client_id')->orderByDesc('id')
         ->paginate(4); 
         }else{
             $products = Products::leftJoin('favoris', function($join) use ($client) {
                 $join->on('products.id', '=', 'favoris.product_id');
             })
-            ->select('products.*', 'favoris.client_id as favoris_client_id')
+            ->select('products.*', 'favoris.client_id as favoris_client_id')->orderByDesc('id')
             ->paginate(4); 
         }
 
@@ -54,13 +54,13 @@ class ClientController extends Controller
                     $join->on('products.id', '=', 'favoris.product_id')
                         ->where('favoris.client_id', '=', $client->id);
                 })
-                ->select('products.*', 'favoris.client_id as favoris_client_id')
+                ->select('products.*', 'favoris.client_id as favoris_client_id')->orderByDesc('id')
                 ->paginate(4); 
             } else {
                 $products = Products::leftJoin('favoris', function($join) {
                     $join->on('products.id', '=', 'favoris.product_id');
                 })
-                ->select('products.*', 'favoris.client_id as favoris_client_id')
+                ->select('products.*', 'favoris.client_id as favoris_client_id')->orderByDesc('id')
                 ->paginate(4); 
             }
         } else {
@@ -68,7 +68,7 @@ class ClientController extends Controller
                 $join->on('products.id', '=', 'favoris.product_id')
                     ->where('favoris.client_id', '=', $client->id);
             })
-            ->select('products.*', 'favoris.client_id as favoris_client_id')
+            ->select('products.*', 'favoris.client_id as favoris_client_id')->orderByDesc('id')
             ->where(function ($queryBuilder) use ($query) {
                 $queryBuilder->where('productName', 'like', "%$query%")
                             ->orWhereHas('category', function ($categoryQuery) use ($query) {

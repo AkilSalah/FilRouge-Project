@@ -8,12 +8,14 @@ Products
         <div class="left">
             <h1>Products</h1>
         </div>
-        <a href="" class="btn-download">
+        <a href="#" class="btn-download">
             <span data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text">Ajouter un Produit</span>
         </a>
     </div>
-    
-    <x-session />
+    <div class="mb-6 mt-4">
+          <x-session />
+
+    </div>
 
    
     <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 mt-10 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -46,7 +48,7 @@ Products
                         </div>
                         <div class="col-span-2 sm:col-span-1"">
                             <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categorie</label>
-                            <select id="category" name="categorie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <select id="category" name="categorie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
                                 <option selected="">Select categorie</option>
                                 @foreach ($categories as $categorie)
                                <option value="{{$categorie->id}}"> {{$categorie->categoryName}} </option>
