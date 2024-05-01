@@ -9,7 +9,6 @@ Mes voyages
             <h1>Travels</h1>
         </div>
         <a href="#" class="btn-download">
-            <i class='bx bxs-cloud-download'></i>
             <span data-modal-target="crud-modal" data-modal-toggle="crud-modal"  class="text">Ajouter un Voyage</span>
         </a>
     </div>

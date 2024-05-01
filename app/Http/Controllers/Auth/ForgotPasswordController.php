@@ -72,11 +72,4 @@ class ForgotPasswordController extends Controller
 
     return redirect()->route('login.create')->with('success','Your password has been updated');
 }
-
-  
-
-
-   }
-    
-    
-
+}

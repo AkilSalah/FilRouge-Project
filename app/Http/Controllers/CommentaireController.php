@@ -86,7 +86,6 @@ class CommentaireController extends Controller
      */
     public function destroy(Commentaire $commentaire)
     {
-        
         $commentaire->delete();
         return redirect()->back()->with('success', 'Comment deleted successfully!');
     }

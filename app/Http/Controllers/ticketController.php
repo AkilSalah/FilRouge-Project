@@ -47,27 +47,4 @@ class ticketController extends Controller
 }
 
 
-    // public function ticket(){
-    // $user = Auth::user();
-    //     if ($user) {
-    //         $clientId = Client::where('id_User', $user->id)->first(); 
-    //         if ($clientId) {
-    //             $data = Reservation::with('client.user', 'voyage.guide.user')
-    //                 ->where('Client_id', $clientId->id)
-    //                 ->where('status', 1)
-    //                 ->orderByDesc('id')
-    //                 ->get();
-    //                 return view('ticket',compact('data'));
-    //         }
-    //     }
-    // }
-
-  
-    //    public function pdf(){
-
-    //        $pdf = Pdf::loadView('pdf');
- 
-    //        return $pdf->stream('akil.pdf');
-    
-    //    }
 }

@@ -459,7 +459,7 @@
             },
             success: function(response) {
                 console.log(response);
-                $('.grid').empty(); // Corrected the selector to empty the correct element
+                $('.Alll').empty(); 
                 response.data.forEach(product => {
                     const heartColor = product.favoris_client_id ? 'red' : 'gray';
                     const html = `
@@ -484,7 +484,7 @@
                                 </div>
                             </div>
                         </a>`;
-                    $('.grid').append(html);
+                    $('.Alll').append(html);
                 });
             },
             error: function(xhr) {

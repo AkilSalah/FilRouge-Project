@@ -17,7 +17,7 @@ class ArticleController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request, $themeId)
-{
+    {
     $theme = Theme::find($themeId);
     $tags = Tag::where('theme_id', $themeId)->get();
     
@@ -27,44 +27,14 @@ class ArticleController extends Controller
         $tagId = $request->input('tag');
         $articlesQuery->where('articleTags', 'LIKE', '%' . $tagId . '%');
     }
-
     $articles = $articlesQuery->get();
 
     return view('Client.article', compact('theme', 'articles', 'tags'));
-}
-
-
-
-    // public function filter(Request $request)
-    // {
-       
-    //     $tag = $request->input('tag');
-    //     $articles = Article::whereJsonContains('articleTags', $tag)->get();
-        
-       
-    
-    //     return response()->json($articles);
-    // }
-    
-    
-    
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        
     }
-    
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(ArticleRequest $request )
     {
-
         $user = Auth::user()->id;
         $client = Client::where('id_User', $user)->first();
         $validatedData = $request->validated();

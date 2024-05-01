@@ -8,8 +8,7 @@
             <div class="left">
                 <h1>Thèmes</h1>
             </div>
-            <a href="#" class="btn-download">
-                <i class='bx bxs-cloud-download'></i>
+            <a href="" class="btn-download">
                 <span data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="text">Ajouter un Thème</span>
             </a>
         </div>

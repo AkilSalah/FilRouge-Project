@@ -24,12 +24,12 @@ class ClientController extends Controller
         $themes = Theme::with('tag')->get();
         $categories = Categories::all();
         if(auth::check()){
-           $products = Products::leftJoin('favoris', function($join) use ($client) {
+        $products = Products::leftJoin('favoris', function($join) use ($client) {
         $join->on('products.id', '=', 'favoris.product_id')
              ->where('favoris.client_id', '=', $client->id);
-    })
-    ->select('products.*', 'favoris.client_id as favoris_client_id')
-    ->paginate(4); 
+        })
+        ->select('products.*', 'favoris.client_id as favoris_client_id')
+        ->paginate(4); 
         }else{
             $products = Products::leftJoin('favoris', function($join) use ($client) {
                 $join->on('products.id', '=', 'favoris.product_id');
@@ -42,44 +42,44 @@ class ClientController extends Controller
     }
 
 
-    public function search(Request $request)
-{
-    $userId = Auth::id();
-    $client = Client::where('id_User', $userId)->first();
-    $query = $request->input('search');
+        public function search(Request $request)
+        {
+        $userId = Auth::id();
+        $client = Client::where('id_User', $userId)->first();
+        $query = $request->input('search');
 
-    if(empty($query)){
-        if(auth::check()){
+        if(empty($query)){
+            if(auth::check()){
+                $products = Products::leftJoin('favoris', function($join) use ($client) {
+                    $join->on('products.id', '=', 'favoris.product_id')
+                        ->where('favoris.client_id', '=', $client->id);
+                })
+                ->select('products.*', 'favoris.client_id as favoris_client_id')
+                ->paginate(4); 
+            } else {
+                $products = Products::leftJoin('favoris', function($join) {
+                    $join->on('products.id', '=', 'favoris.product_id');
+                })
+                ->select('products.*', 'favoris.client_id as favoris_client_id')
+                ->paginate(4); 
+            }
+        } else {
             $products = Products::leftJoin('favoris', function($join) use ($client) {
                 $join->on('products.id', '=', 'favoris.product_id')
-                     ->where('favoris.client_id', '=', $client->id);
+                    ->where('favoris.client_id', '=', $client->id);
             })
             ->select('products.*', 'favoris.client_id as favoris_client_id')
-            ->paginate(4); 
-        } else {
-            $products = Products::leftJoin('favoris', function($join) {
-                $join->on('products.id', '=', 'favoris.product_id');
+            ->where(function ($queryBuilder) use ($query) {
+                $queryBuilder->where('productName', 'like', "%$query%")
+                            ->orWhereHas('category', function ($categoryQuery) use ($query) {
+                                $categoryQuery->where('categoryName', 'like', "%$query%");
+                            });
             })
-            ->select('products.*', 'favoris.client_id as favoris_client_id')
             ->paginate(4); 
         }
-    } else {
-        $products = Products::leftJoin('favoris', function($join) use ($client) {
-            $join->on('products.id', '=', 'favoris.product_id')
-                ->where('favoris.client_id', '=', $client->id);
-        })
-        ->select('products.*', 'favoris.client_id as favoris_client_id')
-        ->where(function ($queryBuilder) use ($query) {
-            $queryBuilder->where('productName', 'like', "%$query%")
-                         ->orWhereHas('category', function ($categoryQuery) use ($query) {
-                             $categoryQuery->where('categoryName', 'like', "%$query%");
-                         });
-        })
-        ->paginate(4); 
-    }
 
-    return response()->json($products);
-}
+        return response()->json($products);
+    }
 
 
     public function tripIndex(){
